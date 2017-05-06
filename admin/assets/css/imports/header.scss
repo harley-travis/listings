@@ -1,0 +1,40 @@
+.logo-font{
+	font-family: $whiteJulyFont;
+}
+.logo-header {
+    background: $blue;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.white-logo {
+    padding-bottom: 10px;
+    color: $white;
+	
+	a{
+		color: $white;
+		text-decoration: none;
+	}
+}
+.header-nav {
+    padding-top: 20px;
+}
+.dashboard-icon{
+	color: $blue;
+}
+
+.page-title{
+	border-bottom: 1px solid $gray;
+    margin-bottom: 20px;
+	padding: 0;
+}
+.page-title-wrapper {
+   
+    padding: 0 0 0;
+    padding-bottom: 10px;
+	
+	h2{
+		font-family: $whiteJulyFont;
+		font-size: 3rem;
+		margin: 0;
+	}
+}

@@ -1,0 +1,19 @@
+{
+    "color": [
+        {
+            "name": "Rose Gold",
+            "price": "500",
+            "img": "../img/roseGold.png"
+        },
+        {
+            "name": "Silver",
+            "price": "400",
+            "img": "../img/roseGold.png"
+         },
+        {
+            "name": "Gold",
+            "price": "700",
+            "img": "../img/roseGold.png"
+        }
+    ]
+}

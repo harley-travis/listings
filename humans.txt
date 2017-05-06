@@ -1,0 +1,17 @@
+# humanstxt.org/
+# The dudes behind making this software
+
+# TEAM AND AUTHORS
+
+    Travis Harley -- UX UI Designer / Senior Developer
+    
+# TECHNOLOGY USED
+
+    HTML5, CSS3
+	JavaScript
+    jQuery
+    PHP5
+    AngualrJS - Thanks Google dudes!
+    Bootstrap - Thanks Twitter dudes!
+
+# BUILT IN SALT LAKE CITY, UTAH

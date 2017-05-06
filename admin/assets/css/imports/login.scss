@@ -1,0 +1,28 @@
+h1.sign-in-header {
+    text-align: center;
+    padding-bottom: 25px;
+	color: $blue;
+}
+.login_wrapper {
+    padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+}
+.bottom-links{
+	ul{
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		padding-top: 10px;
+	}
+	li{
+		list-style: none;
+		padding-right: 7px;
+		border-right: 1px #38383A solid;
+		display: inline-block;
+	}
+	li:last-child{
+		border-right: none;
+		padding-left: 2px;
+	}
+}

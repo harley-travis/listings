@@ -1,0 +1,19 @@
+{
+    "stone": [
+        {
+            "name": "Diamond",
+            "price": "1000",
+            "img": "../img/diamond.png"
+        },
+        {
+            "name": "Fake",
+            "price": "100",
+            "img": "../img/diamond.png"
+         },
+        {
+            "name": "Large",
+            "price": "500",
+            "img": "../img/diamond.png"
+        }
+    ]
+}

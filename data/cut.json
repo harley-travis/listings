@@ -1,0 +1,19 @@
+{
+    "cut": [
+        {
+            "name": "Princess",
+            "price": "200",
+            "img": "../img/princess.png"
+        },
+        {
+            "name": "Square",
+            "price": "100",
+            "img": "../img/princess.png"
+         },
+        {
+            "name": "Opal",
+            "price": "150",
+            "img": "../img/princess.png"
+        }
+    ]
+}

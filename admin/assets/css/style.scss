@@ -1,20 +1,38 @@
 /* VARIABLES */
-@import "includes/variables";
+@import 'imports/variables';
 
 /* GENERALS */
-@import "includes/general";
+@import 'imports/generals';
 
 /* HEADER */
-@import "includes/header";
+@import 'imports/header';
 
-/* OVERRIDES */
-@import "includes/overrides";
+/* LEFT-COL */
+@import 'imports/left-col';
 
-/* FOUNDATION */
-@import "includes/foundation";
+/* DASHBOARD*/
+@import 'imports/dashboard';
 
-/* BTNS */
-@import "includes/btns";
+/* LOGIN PAGE */
+@import 'imports/login';
+
+/* REPORTS */
+@import 'imports/reports';
+
+/* PRODUCTS */
+@import 'imports/products';
+
+/* ORDERS */
+@import 'imports/orders';
+
+/* JOBS */
+@import 'imports/jobs';
+
+/* FEEDBACK */
+@import 'imports/feedback';
+
+/* STORE LOCATIONS */
+@import 'imports/stores';
 
 /* FOOTER */
-@import "includes/footer";
+@import 'imports/footer';

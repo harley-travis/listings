@@ -1,0 +1,73 @@
+{
+    "band": [
+        {
+			"product_id": "001",
+            "name": "Basic",
+            "price": 1000,
+			"description": "this product is awesome",
+			"img": "../img/basicBand.png",
+			"imgSideOne": "../img/basicBand.png",
+			"imgSideTwo": "../img/basicBand.png",
+			"imgSideThree": "../img/basicBand.png",
+            "productOptions": [
+				{
+					"child_id": "c001",
+					"child_name": "Basic Option c001",
+					"child_price": 1000,
+					"child_description": "this is another great product",
+					"child_img": "../img/basicBand.png",
+					"child_imgSideOne": "../img/basicBand.png",
+					"child_imgSideTwo": "../img/basicBand.png",
+					"child_imgSideThree": "../img/basicBand.png"
+				},
+				{
+					"child_id": "c002",
+					"child_name": "Basic Option c002",
+					"child_price": 1000,
+					"child_description": "this is another great product",
+					"child_img": "../img/basicBand.png",
+					"child_imgSideOne": "../img/basicBand.png",
+					"child_imgSideTwo": "../img/basicBand.png",
+					"child_imgSideThree": "../img/basicBand.png"
+				}
+			]
+        },
+		{
+			"product_id": "002",
+            "name": "Thin",
+            "price": 1500,
+			"description": "this product is awesome",
+			"img": "../img/basicBand.png",
+			"imgSideOne": "../img/basicBand.png",
+			"imgSideTwo": "../img/basicBand.png",
+			"imgSideThree": "../img/basicBand.png",
+            "productOptions": []
+        },
+		{
+			"product_id": "003",
+            "name": "Large",
+            "price": 2000,
+			"description": "this product is awesome",
+			"img": "../img/basicBand.png",
+			"imgSideOne": "../img/basicBand.png",
+			"imgSideTwo": "../img/basicBand.png",
+			"imgSideThree": "../img/basicBand.png",
+            "productOptions": [
+				{
+					"child_id": "c003",
+					"child_name": "Large Option c003",
+					"child_price": 2000,
+					"child_description": "this is another great product",
+					"child_img": "../img/basicBand.png",
+					"child_imgSideOne": "../img/basicBand.png",
+					"child_imgSideTwo": "../img/basicBand.png",
+					"child_imgSideThree": "../img/basicBand.png"
+				}
+			]
+        }
+    ],
+	
+	"size":["5", "6", "7", "8", "9", "10", "11", "12", "13"],
+	
+	"category": ["A.Jaffe", "Certa", "Chamilia", "Gabriel & Co.", "Kabirski"]
+}

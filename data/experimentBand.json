@@ -1,0 +1,159 @@
+{	
+	"band": [
+		{
+			"product_id": "b0001",
+			"name": "Basic",
+			"price": "1000",
+			"img":[
+				{
+					"pic_id": "bi1001",
+					"color_name": "Color Name 1",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				},
+				{
+					"pic_id": "bi1002",
+					"color_name": "Color Name 2",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				},
+				{
+					"pic_id": "bi1003",
+					"color_name": "Color Name 3",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				}
+			]
+		},
+		{
+			"product_id": "b2002",
+			"name": "Thin",
+			"price": "1500",
+			"img":[
+				{
+					"pic_id": "bi2001",
+					"color_name": "Color Name 1",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				},
+				{
+					"pic_id": "bi2002",
+					"color_name": "Color Name 2",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				},
+				{
+					"pic_id": "bi2003",
+					"color_name": "Color Name 3",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				}
+			]
+		 },
+		{
+			"product_id": "b3003",
+			"name": "Large",
+			"price": "2000",
+			"img":[
+				{
+					"pic_id": "bi3001",
+					"color_name": "Color Name 1",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				},
+				{
+					"pic_id": "bi3002",
+					"color_name": "Color Name 2",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				},
+				{
+					"pic_id": "bi3003",
+					"color_name": "Color Name 3",
+					"description": "",
+					"src": "../img/basicBand.png",
+					"childImg": [
+						{
+							"side1": "../img/basicBand.png",
+							"side2": "../img/basicBand.png",
+							"side3": "../img/basicBand.png",
+						}
+					]
+				}
+			]
+		}
+	],
+	
+	
+	
+	"size":["5", "6", "7", "8", "9", "10", "11", "12", "13"],
+	
+	"category": ["A.Jaffe", "Certa", "Chamilia", "Gabriel & Co.", "Kabirski"]
+	
+	
+	// PRODUCT ID COUNT 
+	// B = BAND
+	// 0001 = NO MORE THAN 9999 DIFFERENT PRODUCTS
+	
+	// IMG ID
+	// B1 (1 = # OF PRODUCT ID)
+	// BI0001 = B1001
+	// NO MORE THAN 999 DIFFERENT IMG OPTIONS
+	
+}

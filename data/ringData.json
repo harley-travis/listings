@@ -1,0 +1,72 @@
+{
+  "RING": {
+    "BANDTYPE": [
+      {
+        "BANDNAME": "Basic",
+        "BANDPRICE": "1000",
+        "BANDIMG": "basicBand.png"
+      },
+      {
+        "BANDNAME": "Thin",
+        "BANDPRICE": "1500",
+        "BANDIMG": "basicBand.png"
+      },
+      {
+        "BANDNAME": "Large",
+        "BANDPRICE": "2000",
+        "BANDIMG": "basicBand.png"
+      }
+    ],
+    "COLORTYPE": [
+      {
+        "COLORNAME": "Rose Gold",
+        "COLORPRICE": "500",
+        "COLORIMG": "roseGold.png"
+      },
+      {
+        "COLORNAME": "Silver",
+        "COLORPRICE": "400",
+        "COLORIMG": "roseGold.png"
+      },
+      {
+        "COLORNAME": "Gold",
+        "COLORPRICE": "700",
+        "COLORIMG": "roseGold.png"
+      }
+    ],
+    "STONETYPE": [
+      {
+        "STONENAME": "Diamond",
+        "STONEPRICE": "1000",
+        "STONEIMG": "diamond.png"
+      },
+      {
+        "STONENAME": "Fake",
+        "STONEPRICE": "100",
+        "STONEIMG": "diamond.png"
+      },
+      {
+        "STONENAME": "Ruby",
+        "STONEPRICE": "500",
+        "STONEIMG": "diamond.png"
+      }
+    ],
+    "CUTTYPE": [
+      {
+        "CUTNAME": "Princess",
+        "CUTPRICE": "200",
+        "CUTIMG": "princess.png"
+      },
+      {
+        "CUTNAME": "Square",
+        "CUTPRICE": "100",
+        "CUTIMG": "princess.png"
+      },
+      {
+        "CUTNAME": "Opal",
+        "CUTPRICE": "150",
+        "CUTIMG": "princess.png"
+      }
+    ]
+  }
+}

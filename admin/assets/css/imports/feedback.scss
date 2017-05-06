@@ -1,0 +1,19 @@
+.subject-line {
+    border: 1px $gray solid;
+    padding: 10px;
+    overflow: overlay;
+    margin: 15px auto;
+    border-radius: 7px;
+    background: #eee;
+}
+.subject-line:first-child {
+    margin: 0;
+}
+input.feedback-title-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-bottom: 1px solid $gray;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
