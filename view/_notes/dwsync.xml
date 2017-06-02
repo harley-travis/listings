@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="designer.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131237258154424914" remote="131238868200000000" Dst="1" />
-<file name="designer_login_view.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131239254655729573" remote="131239218600000000" Dst="1" />
-<file name="footer.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131241047198365484" remote="131241010800000000" Dst="1" />
-<file name="header.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131238932804606622" remote="131238896400000000" Dst="1" />
+<file name="dashboard.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131297120160712251" remote="131297924400000000" Dst="1" />
+<file name="dashboard_login_view.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131291937220000000" remote="131293678800000000" Dst="1" />
+<file name="footer.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131297958355632555" remote="131297924400000000" Dst="1" />
+<file name="header.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131306679221180407" remote="131306658600000000" Dst="1" />
+<file name="left-col.php" server="sundance.dreamhost.com//designer.whitejuly.com/" local="131301490072846388" remote="131306658600000000" Dst="1" />
+<file name="header.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131394635745162000" remote="131394601200000000" Dst="2" />
+<file name="left-col.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131406868374939267" remote="131406832200000000" Dst="2" />
+<file name="dashboard_login_view.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131405982481022444" remote="131405946000000000" Dst="2" />
+<file name="footer.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250539408403" remote="131387580600000000" Dst="2" />
+<file name="dashboard.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250515588332" remote="131387580600000000" Dst="2" />
+<file name="blank.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250543123970" remote="131387580600000000" Dst="2" />
 </dwsync>

@@ -1,83 +1,122 @@
-<?php include('view/header.php'); ?>
-       
-	<?php 
-		// establish an action. Action used to direct content flow
-		$action = filter_input(INPUT_POST, 'action');
+<?php
+		
+	// grab the database info like you're supposed to do 
+	require_once('view/header.php'); // this needs to be here first. otherwise, you'll get the sessions_start error
+	require_once('model/database.php');
+	require_once('model/login-dashboard.php');
+	require_once('model/ftp.php');
 
+	// establish an action for the user
+	$action = filter_input(INPUT_POST, 'action');
+
+	// if there is no action then show a page 
+	if($action == NULL){
+		$action = filter_input(INPUT_GET, 'action');
 		if($action == NULL){
+			//include('view/header.php');
+			include('view/dashboard_login_view.php');
+		}
+	}
+
+	// controller what to show based left nav
+	switch ($action){
+		case 'dashboard':
+			// display the dashboard
+			include('view/dashboard.php');
+			break;
+		case 'sign-in':
+			// sign the user in
+			$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+			$password = filter_input(INPUT_POST, 'password');
+			$_SESSON['is_valid_user'] = $email.$password;
+			$validUser = $_SESSON['is_valid_user'];
+			$GLOBALS['validUser'];
+			$GLOBALS['email'];
 			
-			// display the userlogin if they're not logged in
-			include('view/designer_login_view.php');
+			if(LoginDatabase::dashboard_login($email, $password)){
+				$_SESSON['is_valid_user'] = true;
+				$isValidUser = $_SESSON['is_valid_user'];
+				include('view/dashboard.php');
+			}else{
+				echo "<div class='alert alert-danger alert-dismissible' role='alert'>
+						<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+							<span aria-hidden='true'>&times;</span>
+						</button>
+							<strong>Error:</strong> Email or Password not recognized. Please try again.</div>";
+				include('view/dashboard_login_view.php');
+			}
 			
-		}else if($action == 'register-account'){
-			
+			break;
+		case 'register-account':
 			// establish the variables. Then deal with it
 			$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 			$password 		=	filter_input(INPUT_POST, 'password');
 			$verifyPassword = 	filter_input(INPUT_POST, 'verifyPassword');
 			$userFirstName	= 	filter_input(INPUT_POST, 'firstName');
 			$userLastName 	= 	filter_input(INPUT_POST, 'lastName');
+			$companyName 	= 	filter_input(INPUT_POST, 'companyName');
 			$_SESSION['firstName'] = $userFirstName; // put that name into a session variable hoe bag
-						
-			// display the info to make sure it's working. then party on
-			echo 'Welcome, ' . $_SESSION['firstName'] . '<br />';
-			echo 'Password = ' . $password . '<br />';
-			echo 'Password encypt = ' . $encryptPass . '<br />';
-			echo 'Verify Password = ' . $verifyPassword . '<br />';
-			echo 'User First Name = ' . $userFirstName . '<br />';
-			echo 'User Last Name = ' . $userLastName . '<br />';
-			echo '<a href="model/logout.php">Logout</a>';
-			
+									
 			// send info to function, insert into database
-			register($email, $password, $userFirstName, $userLastName);
+			LoginDatabase::register($email, $password, $userFirstName, $userLastName);
 			
-			echo "Your account has been registered! Click <a href='model/logout.php'>here</a> to sign in.";
-			
-		}else if($action == 'sign-in'){
-			// THIS SIGN IN IS TO USE THE DESIGNER, NOT FOR THE DASHBOARD
-				
-			$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-			$password = filter_input(INPUT_POST, 'password');
-			$_SESSON['is_valid_user'] = $email.$password;
-			
-			if(designer_login($email, $password)){
-				$_SESSON['is_valid_user'] = true;
-				include('view/designer.php');
-			}else{
-				echo "<div class='alert alert-danger alert-dismissible' role='alert'>
-						<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
-							<span aria-hidden='true'>&times;</span>
-						</button>
-							<strong>Error:</strong> You must login to view the designer</div>";
-				include('view/designer_login_view.php');
-			}
-			
-		}else if($action == 'customerInfo-form'){
-			
-			echo "success!";
-			include('view/billingForm.php');
-			
-		}else if($action == 'billing-form'){
-			
-			echo "success!";
-			include('view/shippingForm.php');
-			
-		}else if($action == 'shipping-form'){
-			
-			echo "Thank you your order has been placed!";
-		}
-
-		else{ 
-			echo "ERROR: Something broke. Pls try again. Error in Controller";
-		}
+			// create folder for company in FTP
+			FTP::createNewDir($companyName);
 		
-?>                
-                
-                
-<?php include('view/footer.php'); ?>
+			// redirct to login page
+			echo "<div class='alert alert-success alert-dismissible' role='alert'>
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+						<span aria-hidden='true'>&times;</span>
+					</button>
+						<strong>Success!</strong> Your account has been created!</div>";
+			include('view/dashboard_login_view.php');
+			break;
+		case 'reports':
+			// view the reports page
+			include('view/header.php');
+			include('view/left-col.php');
+			include('view/reports/index.php');
+			include('view/footer.php');
+			break;
+		case 'users':
+			// view the users page
+			include('view/header.php');
+			include('view/left-col.php');
+			include('view/users/index.php');
+			include('view/footer.php');
+			break;
+		case 'applicants':
+			// view the categories page
+			include('view/header.php');
+			include('view/left-col.php');
+			include('view/applicants/index.php');
+			include('view/footer.php');
+			break;
+		case 'jobs':
+			// view the categories page
+			include('view/header.php');
+			include('view/left-col.php');
+			include('view/jobs/index.php');
+			include('view/footer.php');
+			break;
+		case 'settings':
+			// view the categories page
+			include('view/header.php');
+			include('view/left-col.php');
+			include('view/settings/index.php');
+			include('view/footer.php');
+			break;
+		case 'profile':
+			// view the categories page
+			include('view/header.php');
+			include('view/left-col.php');
+			include('view/profile/index.php');
+			include('view/footer.php');
+			break;
+			
+	}
 
 
-
-
+?>
 
 

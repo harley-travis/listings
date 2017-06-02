@@ -1,0 +1,54 @@
+.logo-font{
+	font-family: $whiteJulyFont;
+}
+.logo-header {
+	background: #337ab7;
+	background: -moz-linear-gradient(left, #337ab7 0%, #5cb85c 100%);
+	background: -webkit-linear-gradient(left, #337ab7 0%,#5cb85c 100%);
+	background: linear-gradient(to right, #337ab7 0%,#5cb85c 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#337ab7', endColorstr='#5cb85c',GradientType=1 );
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.white-logo {
+    padding-bottom: 10px;
+    color: $white;
+	
+	a{
+		color: $white;
+		text-decoration: none;
+	}
+}
+.header-nav {
+    padding-top: 20px;
+}
+.header-nav-wrapper {
+    clear: both;
+    float: right;
+}
+.dropdown-menu {
+    left: -40px !important; // this is used to move the dropdwon to the left
+}
+.dashboard-icon{
+	color: $blue;
+}
+
+.page-title{
+	border-bottom: 1px solid $gray;
+    margin-bottom: 20px;
+	padding: 0;
+}
+form.form-inline {
+    float: right;
+}
+.page-title-wrapper {
+   
+    padding: 0 0 0;
+    padding-bottom: 10px;
+	
+	h2{
+		font-family: $whiteJulyFont;
+		font-size: 3rem;
+		margin: 0;
+	}
+}

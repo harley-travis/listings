@@ -1,0 +1,60 @@
+.login-content{
+	background: #337ab7;
+    background: -moz-linear-gradient(left, #337ab7 0%, #5cb85c 100%);
+    background: -webkit-linear-gradient(left, #337ab7 0%, #5cb85c 100%);
+    background: linear-gradient(to right, #337ab7 0%, #5cb85c 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#337ab7', endColorstr='#5cb85c',GradientType=1 );
+	height: 100vh;
+}
+h1.sign-in-header {
+    text-align: center;
+    padding-bottom: 25px;
+	color: $blue;
+}
+.login_block_wrapper{
+	position: relative;
+}
+.login_wrapper {
+    padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100px;
+	border-radius: 7px;
+	background-color: $white;
+	box-shadow: 4px 5px 10px -7px;
+}
+.bottom-links{
+	ul{
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		padding-top: 10px;
+	}
+	li{
+		list-style: none;
+		padding-right: 7px;
+		border-right: 1px #38383A solid;
+		display: inline-block;
+	}
+	li:last-child{
+		border-right: none;
+		padding-left: 2px;
+	}
+}
+
+.reg-form-wrapper {
+	background: #fff;
+	padding: 35px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 700px;
+	border-radius: 7px;
+	
+	h2{
+		border-bottom: 1px solid #eee;
+   		margin-bottom: 35px;
+	}
+}
