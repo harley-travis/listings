@@ -1,1 +1,1 @@
-settings
+Embed Job Postings to your website

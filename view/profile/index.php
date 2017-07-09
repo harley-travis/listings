@@ -40,9 +40,24 @@
 				// "Size: " . $_FILES["logo-file"]["size"] . "<br>" .
 				// "Temp File: " . $_FILES["logo-file"]["tmp_name"] . "<br>";
 				
+				$ftp_server 	= "sundance.dreamhost.com";
+				$ftp_username = 'trahar20';
+				$ftp_userpass = 'Spiderman1!';
+				$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+				$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+				
+				
+				
+				$logo_file = $_FILES["logo-file"]["name"];
+				//$rename = 'logo.png';
+				
 				// move the file to the specific folders
-				move_uploaded_file($_FILES["logo-file"]["tmp_name"], "/home/trahar20/careers.whitejuly.com/view/profile/company_name/white-july/logo/" . $_FILES["logo-file"]["name"]);
+				move_uploaded_file($_FILES["logo-file"]["tmp_name"], "/home/trahar20/careers.whitejuly.com/profile/white-july/" . $logo_file);
+				
+			//	ftp_rename($ftp_conn, $logo_file, $rename); // rename the uploaded file to logo.png
 								
+				//ftp_close($ftp_conn);
+				
 				include('../header.php');
 				echo "<div class='alert alert-success alert-dismissible' role='alert'>
 						<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
@@ -58,6 +73,27 @@
 			}
 			
 			break;
+		case "delete-logo":
+			$ftp_server = "sundance.dreamhost.com";
+			$ftp_username = 'trahar20';
+			$ftp_userpass = 'Spiderman1!';
+			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+			$delete_file_name  = '/careers.whitejuly.com/profile/white-july/logo.png';
+			
+			if(ftp_delete($ftp_conn, $delete_file_name)){
+				echo "file deleted";
+			}else{
+				echo "there was an error deleting the file";
+			}
+
+			ftp_close($ftp_conn);
+			header("Refresh:0; url=https://www.careers.whitejuly.com/index.php?action=profile"); // refresh page and redirect to this page
+			include('../header.php');
+			include('../left-col.php');
+			include('profile.php');
+			include('../footer.php');
+			break;
 		case "overwrite-logo": 
 			echo " delete this mofo";
 			break;
@@ -70,10 +106,15 @@
 		case "company-bio":
 			echo " company bio";
 			break;
+		case "embed":
+			include('../header.php');
+			include('../left-col.php');
+			include("embed.php");
+			include('../footer.php');
+			break;
 		default: 
 			//$jobs = Jobs_DB::get_all_jobs();
 			include('profile.php');
-			echo "the default switch message";
 	}
 
 ?>

@@ -10,7 +10,8 @@ include('../left-col.php');
 	<div class="form-group">
 		<label for="logo-file">Select Logo</label>
 		<input type="file" name="logo-file" value="logo-file">
-		<p class="help-block">Do not upload files larger than 1GB.</p>
+		<p class="help-block">File format must be .PNG</p>
+		<p class="help-block">File must be named logo.png</p>
 	</div>
 	
 	<a href="<?php echo D_ROOT; ?>/view/profile/index.php?action=view-profile" class="btn btn-primary">Go Back</a>

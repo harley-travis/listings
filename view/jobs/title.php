@@ -4,6 +4,7 @@
 			<h1>All Jobs</h1>
 		</div>
 		<div class="col-md-8">
+<!--
 			<form class="form-inline">
 				<div class="form-group">
 					<label for="">Action:</label>
@@ -22,8 +23,10 @@
 					  <option value="mercedes">Date Applied</option>
 					</select>
 				</div>
-				<a href="<?php echo D_ROOT; ?>/view/jobs/add-job.php" class="btn btn-success">Add Job</a>
-			</form>
+
+				
+			</form> -->
+			<a href="<?php echo D_ROOT; ?>/view/jobs/add-job.php" class="btn btn-success">Add Job</a>
 		</div>
 	</div><!-- row -->
 </div><!-- title-bar -->

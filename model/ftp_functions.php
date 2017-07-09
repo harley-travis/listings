@@ -51,7 +51,7 @@
 		}
 		
 		// upload new logo
-		public static function overwriteLogo(){
+		public static function deleteLogo(){
 			
 		}
 

@@ -2,15 +2,15 @@
 
 class Users{
 	
-	private $user_id, $userFirstName, $userLastName, $email, $password, $role, $jobTitle;
+	private $user_id, $userFirstName, $userLastName, $email, $password;
 	
-	public function __construct($userFirstName, $userLastName, $email, $password, $role, $jobTitle){
+	public function __construct($userFirstName, $userLastName, $email, $password){
 		$this->user_FirstName = $userFirstName;
 		$this->user_LastName = $userLastName;
 		$this->user_email = $email;
 		$password = sha1($email . $password); // encrypt this junk
 		$this->user_password = $password;
-		$this->role = $role;
+		//$this->role = $role;
 		$this->jobTitle = $jobTitle;
 	}
 	

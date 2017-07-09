@@ -10,6 +10,8 @@
 	//$_SESSION['userName'] = LoginDatabase::find_current_user($userID); // query the db for the user based on userID
 	//$userName = $_SESSION['userName'][$userID]; // displays in an array. filter that junk out
 
+	//echo $GLOBALS['validUser'] . " the global var";
+
 ?>
 <header>
 	<div class="container-fluid logo-header">

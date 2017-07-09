@@ -1,9 +1,9 @@
 <?php
 
 	class Database{
-		private static $dsn = 'HIDE THIS';
-		private static $username = 'HIDE THIS';
-		private static $password = 'HIDE THIS';
+		private static $dsn = 'mysql:host=db.whitejuly.com;dbname=whitejuly_store';
+		private static $username = 'whitejuly_admin';
+		private static $password = 'Spiderman1!';
 		private static $db;
 		
 		private function __construct(){}

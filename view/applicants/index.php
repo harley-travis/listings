@@ -15,10 +15,7 @@
 	// require the database information
 	require_once  __DIR__ . "/../header.php";
 	require_once  __DIR__ . "/../../model/database.php";
-	require_once  __DIR__ . "/../../model/jobs.php";
-	require_once  __DIR__ . "/../../model/job_db.php";
-	require_once  __DIR__ . "/../../model/login-dashboard.php";
-	include('title.php');
+	require_once  __DIR__ . "/../../model/applicant_db.php";
 
 	// controll the action the user selects
 	switch ($action){
@@ -26,7 +23,7 @@
 			echo "lets add a job";
 			break;
 		default: 
-			//$applicants = Jobs_DB::get_all_jobs();
+			$applicants = Applicants::get_applicants();
 			include('applicants.php');
 	}
 

@@ -36,7 +36,10 @@
 			if(LoginDatabase::dashboard_login($email, $password)){
 				$_SESSON['is_valid_user'] = true;
 				$isValidUser = $_SESSON['is_valid_user'];
+				 
 				include('view/dashboard.php');
+				
+				print_r($_SESSION['userName'][$_SESSON['is_valid_user']]);
 			}else{
 				echo "<div class='alert alert-danger alert-dismissible' role='alert'>
 						<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
