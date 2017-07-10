@@ -25,9 +25,16 @@
 							background-color: #fafafa;
 							padding: 0 15px 0 15px;
 						}
+						.logo{
+							width: 100%;
+							max-width: 250px;
+						}
 					</style>
 				</head>
 				<body>
+					<div class='logo'>
+						<img src='https://careers.whitejuly.com/profile/white-july/logo.png' class='logo' alt=''>
+					</div>
 					<div class='col-md-9 col-sm-6 col-xs-12 post-left'>
 						<h1>".$job['job_title']."</h1>
 						<hr>

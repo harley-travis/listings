@@ -58,19 +58,15 @@
 			$location = filter_input(INPUT_POST, 'location');
 			$department = filter_input(INPUT_POST, 'department');
 			
-			// validate 
-			if($jobTitle == NULL || $description == NULL || $qualifications == NULL || add_info == NULL || $salary == NULL || $location == NULL || $department == NULL){
-				echo "There was an error editing the job. Please try again.";
-			}else{
-				Jobs::edit_job($job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department);
-				$jobs = Jobs::get_all_jobs(); // grab the data and view
-			
-				include('../header.php');
-				include('../left-col.php');
-				include('title.php');
-				include('jobs.php');
-				include('../footer.php');
-			}			
+			Jobs::edit_job($job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department);
+			$jobs = Jobs::get_all_jobs(); // grab the data and view
+
+			include('../header.php');
+			include('../left-col.php');
+			include('title.php');
+			include('jobs.php');
+			include('../footer.php');
+						
 			break;
 		case "edit-job-id":
 			
@@ -88,6 +84,43 @@
 				echo "There was an error deleting the band";
 			}else{
 				Jobs::delete_job($job_id);
+				$jobs = Jobs::get_all_jobs();
+				include('../header.php');
+				include('../left-col.php');
+				include('title.php');
+				include('jobs.php');
+				include('../footer.php');
+			}
+			break;
+		case "archive-job":
+			$job_id = filter_input(INPUT_POST, 'job_id');
+			if($job_id == NULL || $job_id == FALSE){
+				echo "There was an error deleting the band";
+			}else{
+				Jobs::marked_archived($job_id);
+				$jobs = Jobs::get_all_archive_jobs();
+				include('../header.php');
+				include('../left-col.php');
+				include('title.php');
+				include('archive-jobs.php');
+				include('../footer.php');
+			}
+			break;
+		case "archive-jobs":
+			$jobs = Jobs::get_all_archive_jobs();
+			include('../header.php');
+			include('../left-col.php');
+			include('title.php');
+			include('archive-jobs.php');
+			include('../footer.php');
+			break;
+		case "activate-job":
+			
+			$job_id = filter_input(INPUT_POST, 'job_id');
+			if($job_id == NULL || $job_id == FALSE){
+				echo "There was an error deleting the band";
+			}else{
+				Jobs::marked_active($job_id);
 				$jobs = Jobs::get_all_jobs();
 				include('../header.php');
 				include('../left-col.php');

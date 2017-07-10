@@ -1,27 +1,14 @@
 <div class="container-fluid page-title">
-	<div class="col-md-3 col-xs-12 page-title-wrapper">
-		<h2>Applicants</h2>
+	<div class="col-md-6 col-xs-12 page-title-wrapper">
+		<h2>Applicants: 1st Interview</h2>
 	</div><!-- container -->
-	<div class="col-md-9 col-xs-12 btn-wrapper">
-			<form action="<?php echo D_ROOT; ?>/view/applicants/index.php" method="post" class="form-inline">
-				<div class="form-group">
-					<select name="action" class="form-control">
-					  <option value="">- Select View -</option>
-					  <option value="stage-phone">Phone Interviews</option>
-					  <option value="stage-one">1st Interviews</option>
-					  <option value="stage-two">2nd Inteviews</option>
-					  <option value="stage-three">3rd Interviews</option>
-					</select>
-				</div>
-				<input type="submit" class="btn btn-primary" value="Apply">
-			</form>
-		
+	<div class="col-md-6 col-xs-12 btn-wrapper">
 			<form action="<?php echo D_ROOT; ?>/view/applicants/index.php" method="post" class="form-inline">
 				<div class="form-group">
 					<label for="">Action:</label>
 					<select name="action" class="form-control">
 					  <option value="">- Select Action -</option>
-					  <option value="notQualified">Not Qualified / Archive</option>
+					  <option value="notQualified">Not Qualified</option>
 					  <option value="phone">Phone Interview Complete</option>
 					  <option value="one">1st Interview Complete</option>
 					  <option value="two">2nd Interview Complete</option>
@@ -76,7 +63,7 @@
 		<td><?php echo $applicant['job_title']; ?></td>
 		<td><?php echo $applicant['applicant_firstName'] . " " . $applicant['applicant_lastName']; ?></td>
 		<td><?php echo $applicant['applicant_phone']; ?></td>
-		<td><a href="<?php echo "/profile/white-july/resumes/". $applicant['applicant_lastName']."_".$applicant['applicant_firstName']; ?>/resume.pdf" download>View Resume</a></td>
+		<td><a href="<?php echo "../../profile/white-july/resumes/". $applicant['applicant_lastName']."_".$applicant['applicant_firstName']; ?>/resume.pdf" download>View Resume</a></td>
 		<td></td>
 	</tr>
 	<?php endforeach; ?>

@@ -35,28 +35,31 @@
 				$file_result .= "Error code: " .$_FILES["logo-file"]["error"] . "<br>";
 				
 			}else{
-				// "Upload: " . $_FILES["logo-file"]["name"] . "<br>" .
-				// "Type: " . $_FILES["logo-file"]["type"] . "<br>" .
-				// "Size: " . $_FILES["logo-file"]["size"] . "<br>" .
-				// "Temp File: " . $_FILES["logo-file"]["tmp_name"] . "<br>";
 				
 				$ftp_server 	= "sundance.dreamhost.com";
 				$ftp_username = 'trahar20';
 				$ftp_userpass = 'Spiderman1!';
 				$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
-				$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
-				
-				
+				$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);	
 				
 				$logo_file = $_FILES["logo-file"]["name"];
-				//$rename = 'logo.png';
+				$tempFile = $_FILES["logo-file"]["tmp_name"];
+				
+				$logoLocation = "/home/trahar20/careers.whitejuly.com/profile/white-july/" . $logo_file;
 				
 				// move the file to the specific folders
-				move_uploaded_file($_FILES["logo-file"]["tmp_name"], "/home/trahar20/careers.whitejuly.com/profile/white-july/" . $logo_file);
+				move_uploaded_file($tempFile, $logoLocation);
 				
-			//	ftp_rename($ftp_conn, $logo_file, $rename); // rename the uploaded file to logo.png
-								
-				//ftp_close($ftp_conn);
+				// the new file location
+				$urlLocation = "/careers.whitejuly.com/profile/white-july/".$logo_file;
+				$renameLogo = "/careers.whitejuly.com/profile/white-july/logo.png";
+				
+				// rename the resume file
+				ftp_rename($ftp_conn, $urlLocation, $renameLogo);
+				
+				
+				
+				
 				
 				include('../header.php');
 				echo "<div class='alert alert-success alert-dismissible' role='alert'>
@@ -67,9 +70,7 @@
 				include('../left-col.php');
 				include("profile.php");
 				include('../footer.php');
-				
-				
-				
+
 			}
 			
 			break;

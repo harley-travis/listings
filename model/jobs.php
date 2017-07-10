@@ -81,7 +81,20 @@ class Jobs{
 	public static function get_all_jobs(){
 		$db = Database::getDB();
 
-		$query = 'SELECT * FROM jobs';
+		$query = 'SELECT * FROM jobs WHERE is_active=0';
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$jobs = $statement->fetchAll();
+		$statement->closeCursor();
+
+		return $jobs;    
+	}
+	
+	public static function get_all_archive_jobs(){
+		$db = Database::getDB();
+
+		$query = 'SELECT * FROM jobs 
+		          WHERE is_active=1';
 		$statement = $db->prepare($query);
 		$statement->execute();
 		$jobs = $statement->fetchAll();
@@ -128,7 +141,7 @@ class Jobs{
 		$statement = $db->prepare($query);
 		$statement->bindValue(":job_id", $job_id);
 		$statement->execute();
-		$band = $statement->fetch();
+		$job = $statement->fetch();
 		$statement->closeCursor();
 		return $job;
 		
@@ -171,6 +184,36 @@ class Jobs{
 		$statement->execute();
 		$statement->closeCursor();
 	
+	}
+	
+	// move the job to the archived page
+	public function marked_archived($job_id){
+		$db = Database::getDB();
+
+		$query = 'UPDATE jobs
+		  SET is_active  = 1
+		  WHERE job_id   = :job_id';
+
+		$statement = $db->prepare($query);
+		$statement->bindValue(':job_id', $job_id);
+		$statement->execute();
+		$statement->closeCursor();
+		
+	}
+	
+	// move the job to the archived page
+	public function marked_active($job_id){
+		$db = Database::getDB();
+
+		$query = 'UPDATE jobs
+		  SET is_active  = 0
+		  WHERE job_id   = :job_id';
+
+		$statement = $db->prepare($query);
+		$statement->bindValue(':job_id', $job_id);
+		$statement->execute();
+		$statement->closeCursor();
+		
 	}
 
 }

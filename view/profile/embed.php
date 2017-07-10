@@ -14,5 +14,6 @@ xmp {
 <h2>Embed Job Postings</h2>
 <p>Copy this code and paste it on your website to display job listings.</p>
 <p>This code is mobile responsive, and shouldn't need additional CSS changes.</p>
+<a href="https://www.careers.whitejuly.com/profile/white-july/jobs/jobs-view.php" target="_blank" class="btn btn-primary">View Page</a>
 <xmp><iframe src="https://www.careers.whitejuly.com/profile/white-july/jobs/jobs-view.php" height="100%" width="100%" allowfullscreen="" frameborder="0"></iframe></xmp>
 <?php include('../footer.php'); ?>

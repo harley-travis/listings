@@ -20,37 +20,32 @@
 
 			<div class="form-group">
 				<label for="description">Description</label><span class="red-txt">*</span>
-				<textarea class="form-control" rows="3" name="description" placeholder="Enter job description"></textarea>
+				<textarea class="form-control" rows="3" name="description"><?php echo $job['description']; ?></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="qualifications">Qualifications</label><span class="red-txt">*</span>
-				<textarea class="form-control" rows="3" name="qualifications" placeholder="Enter job qualifications"></textarea>
+				<textarea class="form-control" rows="3" name="qualifications"><?php echo $job['qualifications']; ?></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="add_info">Additional Information</label>
-				<textarea class="form-control" rows="3" name="add_info" placeholder="Enter additional information"></textarea>
+				<textarea class="form-control" rows="3" name="add_info"><?php echo $job['add_info']; ?></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="salary">Salary</label><span class="red-txt">*</span>
-				<input type="text" class="form-control" name="salary" placeholder="Salary">
+				<input type="text" class="form-control" name="salary" value="<?php echo $job['salary']; ?>">
 			</div>
 
 			<div class="form-group">
 				<label for="location">Location</label><span class="red-txt">*</span>
-				<input type="text" class="form-control" name="location" placeholder="Location">
+				<input type="text" class="form-control" name="location" value="<?php echo $job['location']; ?>">
 			</div>
 
 			<div class="form-group">
 				<label for="department">Department</label><span class="red-txt">*</span>
-				<input type="text" class="form-control" name="department" placeholder="Department">
-			</div>
-
-			<div class="form-group">
-				<label for="closeDate">Close Date</label><span class="red-txt">*</span>
-				<input type="text" class="form-control" name="closeDate" id="datepicker">
+				<input type="text" class="form-control" name="department" value="<?php echo $job['dept']; ?>">
 			</div>
 	
 		<div class="pg-btns">

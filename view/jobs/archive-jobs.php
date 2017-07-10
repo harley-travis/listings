@@ -24,9 +24,9 @@
 		</td>
 		<td>
 			<form action="<?php echo D_ROOT; ?>/view/jobs/index.php" method="post">
-				<input type="hidden" name="action" value="archive-job">
+				<input type="hidden" name="action" value="activate-job">
 				<input type="hidden" name="job_id" value="<?php echo $job['job_id']; ?>">
-				<input type="submit" class="btn btn-info" value="Archive Job">
+				<input type="submit" class="btn btn-success" value="Activate">
 			</form>
 		</td>
 	</tr>

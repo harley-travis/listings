@@ -24,14 +24,16 @@
 			<div class="header-nav-wrapper">
 				<div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<span class="glyphicon glyphicon-user dashboard-icon" aria-hidden="true"></span> <?php echo "Username"; ?> 
+						<span class="glyphicon glyphicon-user dashboard-icon" aria-hidden="true"></span> <?php echo "My Account"; ?> 
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						<li><a href="<?php echo D_ROOT; ?>/index.php?action=profile"><span class="glyphicon glyphicon-user dashboard-icon" aria-hidden="true"></span> Profile</a></li>
 						
 						<li><a href="<?php echo D_ROOT; ?>/index.php?action=users"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Users</a></li>
+<!--
 						
 						<li><a href="<?php echo D_ROOT; ?>/index.php?action=settings"><span class="glyphicon glyphicon-cog dashboard-icon" aria-hidden="true"></span> Settings</a></li>
+-->
 						
 						<li role="separator" class="divider"></li>
 						
@@ -53,6 +55,8 @@
 					<li role="presentation"><a href="<?php echo D_ROOT; ?>/index.php?action=applicants"><span class="glyphicon glyphicon-user dashboard-icon" aria-hidden="true"></span> Applicants</a></li>
 					
 					<li role="presentation"><a href="<?php echo D_ROOT; ?>/index.php?action=jobs"><span class="glyphicon glyphicon-briefcase dashboard-icon" aria-hidden="true"></span> Jobs</a></li>
+					
+					<li role="presentation"><a href="<?php echo D_ROOT; ?>/view/applicants/index.php?action=view-hired"><span class="glyphicon glyphicon-briefcase dashboard-icon" aria-hidden="true"></span> Hired Employees</a></li>
 					
 <!--					<li role="presentation"><a href="<?php echo D_ROOT; ?>/index.php?action=reports"><span class="glyphicon glyphicon-stats dashboard-icon" aria-hidden="true"></span> Reports</a></li>-->
 					

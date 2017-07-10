@@ -39,12 +39,6 @@ class LoginDatabase{
 		return $valid;
 
 	}
-	
-	public static function find_current_user($userID){
-		// this is where i have left off
-		// i did not create this function
-		// make it good you sexy !@#$
-	}
 
 	public static function last_logon($timestamp){
 		$db = Database::getDB();
