@@ -16,8 +16,8 @@ define("DASHBOARD_FUNCTIONS",    dirname(__FILE__)."/model/dashboard_functions.p
 define("LEFT_COL",    			 dirname(__FILE__)."/view/left-col.php");
 
 // define ftp connection
-$ftp_server 	= "sundance.dreamhost.com";
-$ftp_username 	= 'trahar20';
-$ftp_userpass	= 'Spiderman1!';
+$ftp_server 	= "XXXXXXXXXX";
+$ftp_username 	= 'XXXXXX';
+$ftp_userpass	= 'XXXXXXX';
 
 ?>
