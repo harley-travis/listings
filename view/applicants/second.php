@@ -1,8 +1,23 @@
+
 <div class="container-fluid page-title">
 	<div class="col-md-6 col-xs-12 page-title-wrapper">
 		<h2>Applicants: 2nd Interview</h2>
 	</div><!-- container -->
 	<div class="col-md-6 col-xs-12 btn-wrapper">
+		<form action="<?php echo D_ROOT; ?>/view/applicants/index.php" method="post" class="form-inline">
+				<div class="form-group">
+					<select name="action" class="form-control">
+					  <option value="">- Select View -</option>
+					  <option value="archive-applicants">Archived Applicants</option>
+					  <option value="stage-phone">Phone Interviews</option>
+					  <option value="stage-one">1st Interviews</option>
+					  <option value="stage-two">2nd Inteviews</option>
+					  <option value="stage-three">3rd Interviews</option>
+					</select>
+				</div>
+				<input type="submit" class="btn btn-primary" value="Apply">
+			</form>
+		
 			<form action="<?php echo D_ROOT; ?>/view/applicants/index.php" method="post" class="form-inline">
 				<div class="form-group">
 					<label for="">Action:</label>
@@ -17,7 +32,6 @@
 					</select>
 				</div>
 				<input type="submit" class="btn btn-success" value="Apply">
-		<a href="<?php echo D_ROOT; ?>/view/applicants/index.php?action=archive-applicants" class="btn btn-info">Archived Applicants</a>
 	</div>
 </div><!-- page-title -->
 

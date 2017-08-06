@@ -8,23 +8,12 @@
 					<label for="">Action:</label>
 					<select class="form-control">
 					  <option value="">- select -</option>
-					  <option value="volvo">Edit</option>
-					  <option value="volvo">Delete</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="">Filter By:</label>
-					<select class="form-control">
-					  <option value="">- select -</option>
-					  <option value="volvo">Alphabetized</option>
-					  <option value="saab">Job</option>
-					  <option value="mercedes">Date Applied</option>
+					  <option value="volvo">Marked Archived</option>
 					</select>
 				</div>
 			</form> 
 
-		<a href="<?php echo D_ROOT; ?>/view/jobs/add-job.php" class="btn btn-success">Add Job</a>
-		<a href="<?php echo D_ROOT; ?>/view/jobs/index.php?action=archive-jobs" class="btn btn-info">Archived Jobs</a>
+		<a href="<?php echo D_ROOT; ?>/view/jobs/add-job.php" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Add Job</a>
 	</div>
 </div><!-- page-title -->
 

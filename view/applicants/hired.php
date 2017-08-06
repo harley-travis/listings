@@ -2,27 +2,10 @@
 	<div class="col-md-6 col-xs-12 page-title-wrapper">
 		<h2>Employees Hired</h2>
 	</div><!-- container -->
-	<div class="col-md-6 col-xs-12 btn-wrapper">
-			<form action="<?php echo D_ROOT; ?>/view/applicants/index.php" method="post" class="form-inline">
-				<div class="form-group">
-					<label for="">Action:</label>
-					<select name="action" class="form-control">
-					  <option value="">- Select Action -</option>
-					  <option value="notQualified">Not Qualified</option>
-					  <option value="phone">Phone Interview Complete</option>
-					  <option value="one">1st Interview Complete</option>
-					  <option value="two">2nd Interview Complete</option>
-					  <option value="three">3rd Interview Complete</option>
-					</select>
-				</div>
-				<input type="submit" class="btn btn-success" value="Apply">
-		<a href="<?php echo D_ROOT; ?>/view/applicants/index.php?action=archive-applicants" class="btn btn-info">Archived Applicants</a>
-	</div>
 </div><!-- page-title -->
 
 <table class="table table-striped table-hover">
 	<tr>
-		<th>Action</th>
 		<th>Job Id</th>
 		<th>Interview Stage</th>
 		<th>Position</th>
@@ -33,7 +16,6 @@
 	</tr>
 	<?php foreach ($applicants as $applicant) : ?>
 	<tr>
-		<td><input type="checkbox" name="applicant_action[]" value="<?php echo $applicant['applicant_id']; ?>"></td>
 		<td>000<?php echo $applicant['job_id']; ?></td>
 		<td>
 			<?php 
@@ -66,5 +48,4 @@
 		<td></td>
 	</tr>
 	<?php endforeach; ?>
-	</form> 
 </table>

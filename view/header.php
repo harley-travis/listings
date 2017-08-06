@@ -43,5 +43,10 @@ require_once(SECURE_CONNECTION);
 		  } );
 			
 		</script>
+      <style>
+	   h2, hr{
+		   color: #337BB6;
+	   }
+		</style>
     </head>
     <body> 

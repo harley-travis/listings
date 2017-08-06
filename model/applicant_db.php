@@ -2,6 +2,24 @@
 
 	class Applicants{
 		
+		public function get_applicants_by_user_id($user_id){
+			$db = Database::getDB();
+			
+			$query = 'SELECT * FROM applicants 
+				      INNER JOIN jobs 
+					  ON applicants.job_id = jobs.job_id 
+					  WHERE applicants.company_id = :user_id';
+			
+			$statement = $db->prepare($query);
+			$statement->bindValue(':user_id', $user_id);
+			$statement->execute();
+			$applicants = $statement->fetchAll();
+			$statement->closeCursor();
+			
+			return $applicants;
+
+		}
+		
 		public function get_applicants(){
 			$db = Database::getDB();
 			
@@ -9,7 +27,8 @@
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
 					  WHERE applicants.is_active=0 
-					  AND jobs.is_active=0';
+					  AND jobs.is_active=0
+					  AND NOT stage=6';
 
 			$statement = $db->prepare($query);
 			$statement->execute();
@@ -19,15 +38,38 @@
 			return $applicants;
 		}
 		
-		public function get_archive_applicants(){
+		public function get_recent_applicants($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
+					  WHERE applicants.is_active=0 
+					  AND jobs.is_active=0
+					  AND applicants.company_id = :company_id
+					  ORDER BY date_applied DESC
+					  LIMIT 10';
+
+			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
+			$statement->execute();
+			$applicants = $statement->fetchAll();
+			$statement->closeCursor();
+			
+			return $applicants;
+		}
+		
+		public function get_archive_applicants($company_id){
+			$db = Database::getDB();
+			
+			$query = 'SELECT * FROM applicants 
+			          INNER JOIN jobs 
+					  ON applicants.job_id = jobs.job_id 
+					  AND applicants.company_id = :company_id
 					  WHERE applicants.is_active=1';
 			
 			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();
@@ -235,15 +277,17 @@
 		}
 		
 		// search for phone
-		public function get_all_phone(){
+		public static function get_all_phone($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
-					  WHERE applicants.stage=1';
+					  WHERE applicants.stage=1
+					  AND applicants.company_id = :company_id';
 			
 			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();
@@ -252,15 +296,17 @@
 		}
 		
 		// search for one
-		public function get_all_one(){
+		public function get_all_one($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
-					  WHERE applicants.stage=2';
+					  WHERE applicants.stage=2
+					  AND applicants.company_id = :company_id';
 			
 			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();
@@ -269,15 +315,17 @@
 		}
 
 		// search for two
-		public function get_all_two(){
+		public function get_all_two($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
-					  WHERE applicants.stage=3';
+					  WHERE applicants.stage=3
+					  AND applicants.company_id = :company_id';
 			
 			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();
@@ -286,15 +334,17 @@
 		}
 		
 		// search for three
-		public function get_all_three(){
+		public function get_all_three($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
-					  WHERE applicants.stage=4';
+					  WHERE applicants.stage=4
+					  AND applicants.company_id = :company_id';
 			
 			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();
@@ -303,15 +353,17 @@
 		}
 		
 		// search for four
-		public function get_all_four(){
+		public function get_all_four($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
-					  WHERE applicants.stage=5';
+					  WHERE applicants.stage=5
+					  AND applicants.company_id = :company_id';
 			
 			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();
@@ -320,15 +372,17 @@
 		}
 		
 		// search for hired
-		public function get_all_hired(){
+		public function get_all_hired($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 			          INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
-					  WHERE applicants.stage=6';
+					  WHERE applicants.stage=6
+					  AND applicants.company_id = :company_id';
 			
 			$statement = $db->prepare($query);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();

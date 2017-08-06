@@ -78,11 +78,15 @@ class Jobs{
 		$this->department = $value;
 	}
 	
-	public static function get_all_jobs(){
+	public static function get_all_jobs($company_id){
 		$db = Database::getDB();
 
-		$query = 'SELECT * FROM jobs WHERE is_active=0';
+		$query = 'SELECT * FROM jobs 
+				  WHERE is_active=0
+				  AND company_id = :company_id
+				  ORDER BY date DESC';
 		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
 		$statement->execute();
 		$jobs = $statement->fetchAll();
 		$statement->closeCursor();
@@ -90,12 +94,49 @@ class Jobs{
 		return $jobs;    
 	}
 	
-	public static function get_all_archive_jobs(){
+	public static function get_recent_jobs_by_company($company_id){
 		$db = Database::getDB();
 
 		$query = 'SELECT * FROM jobs 
-		          WHERE is_active=1';
+				  WHERE is_active=0
+				  AND company_id = :company_id
+				  ORDER BY date DESC
+				  LIMIT 10';
+		
 		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$jobs = $statement->fetchAll();
+		$statement->closeCursor();
+
+		return $jobs; 
+	}
+	
+	public static function get_recent_jobs($company_id){
+		$db = Database::getDB();
+
+		$query = 'SELECT * FROM jobs 
+				  WHERE is_active=0
+				  AND company_id = :company_id
+				  ORDER BY date DESC
+				  LIMIT 10';
+		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$jobs = $statement->fetchAll();
+		$statement->closeCursor();
+
+		return $jobs;    
+	}
+	
+	public static function get_all_archive_jobs($company_id){
+		$db = Database::getDB();
+
+		$query = 'SELECT * FROM jobs 
+		          WHERE is_active=1
+				  AND company_id = :company_id';
+		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
 		$statement->execute();
 		$jobs = $statement->fetchAll();
 		$statement->closeCursor();
@@ -103,7 +144,7 @@ class Jobs{
 		return $jobs;    
 	}
 
-	public static function add_job($newJob){
+	public static function add_job($newJob, $company_id){
 		$db = Database::getDB();
 
 		// pull the objects and put them in variables
@@ -114,11 +155,13 @@ class Jobs{
 		$salary = $newJob->getSalary();
 		$location = $newJob->getLocation();
 		$dept = $newJob->getDepartment();
+		
+		//$timestamp = date("Y-m-d H:i:s A");
 
 		$query = "INSERT INTO jobs
-				(job_title, description, qualifications, add_info, salary, location, dept)
+				(job_title, description, qualifications, add_info, salary, location, dept, company_id)
 				VALUES
-				(:job_title, :description, :qualifications, :add_info, :salary, :location, :dept)";
+				(:job_title, :description, :qualifications, :add_info, :salary, :location, :dept, :company_id)";
 
 		$statement = $db->prepare($query);
 		$statement->bindValue(':job_title', $job_title);
@@ -128,18 +171,22 @@ class Jobs{
 		$statement->bindValue(':salary', $salary);
 		$statement->bindValue(':location', $location);
 		$statement->bindValue(':dept', $dept);
+		$statement->bindValue(':company_id', $company_id);
+		//$statement->bindValue(':date', $timestamp);
 		$statement->execute();
 		$statement->closeCursor();
 
 	}
 	
-	public static function get_job_by_id($job_id){
+	public static function get_job_by_id($job_id, $company_id){
 		$db = Database::getDB();
 		
 		$query = 'SELECT * FROM jobs
-				  WHERE job_id = :job_id';
+				  WHERE job_id = :job_id
+				  AND company_id = :company_id';
 		$statement = $db->prepare($query);
 		$statement->bindValue(":job_id", $job_id);
+		$statement->bindValue(":company_id", $company_id);
 		$statement->execute();
 		$job = $statement->fetch();
 		$statement->closeCursor();
@@ -147,7 +194,7 @@ class Jobs{
 		
 	}
 
-	public static function edit_job($job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department){
+	public static function edit_job($job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department, $company_id){
 		$db = Database::getDB();
 		
 		$query = 'UPDATE jobs
@@ -159,7 +206,8 @@ class Jobs{
 					  salary           = :salary,
 					  location         = :location,
 					  dept             = :dept
-				  WHERE job_id         = :job_id';
+				  WHERE job_id         = :job_id
+				  AND company_id	   = :company_id';
 		$statement = $db->prepare($query);
 		$statement->bindValue(':job_id', $job_id);
 		$statement->bindValue(':job_title', $jobTitle);
@@ -169,6 +217,7 @@ class Jobs{
 		$statement->bindValue(':salary', $salary);
 		$statement->bindValue(':location', $location);
 		$statement->bindValue(':dept', $department);
+		$statement->bindValue(':company_id', $company_id);
 		$statement->execute();
 		$statement->closeCursor();
 		
@@ -200,6 +249,25 @@ class Jobs{
 		$statement->closeCursor();
 		
 	}
+		
+	// move mulitple jobs to the archived page
+	public function marked_many_archived($marked){
+		$db = Database::getDB();
+
+		// foreach loop
+		foreach($marked as $mark){
+
+			$query = 'UPDATE jobs
+			  SET is_active		   = 1
+			  WHERE job_id   = :job_id';
+
+			$statement = $db->prepare($query);
+			$statement->bindValue(':job_id', $mark);
+			$statement->execute();
+			$statement->closeCursor();
+		}
+		
+	}
 	
 	// move the job to the archived page
 	public function marked_active($job_id){
@@ -213,6 +281,25 @@ class Jobs{
 		$statement->bindValue(':job_id', $job_id);
 		$statement->execute();
 		$statement->closeCursor();
+		
+	}
+	
+	// move mulitple jobs to the archived page
+	public function marked_many_active($marked){
+		$db = Database::getDB();
+
+		// foreach loop
+		foreach($marked as $mark){
+
+			$query = 'UPDATE jobs
+			  SET is_active		   = 0
+			  WHERE job_id   = :job_id';
+
+			$statement = $db->prepare($query);
+			$statement->bindValue(':job_id', $mark);
+			$statement->execute();
+			$statement->closeCursor();
+		}
 		
 	}
 

@@ -1,6 +1,6 @@
 <div class="container-fluid page-title">
 	<div class="col-md-6 col-xs-12 page-title-wrapper">
-		<h2>Applicants</h2>
+		<h2>Archived Applicants</h2>
 	</div><!-- container -->
 	<div class="col-md-6 col-xs-12 btn-wrapper">
 			<form action="<?php echo D_ROOT; ?>/view/applicants/index.php" method="post" class="form-inline">

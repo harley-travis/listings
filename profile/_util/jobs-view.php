@@ -7,10 +7,7 @@
 	define("JOB_URL", "https://careers.whitejuly.com/profile/white-july/jobs/");
 
 	// call the jobs 
-
-	// need to find a way to specify the account with no session 
-
-	$jobs = Jobs::get_all_jobs($_SESSION['company_id']);
+	$jobs = Jobs::get_all_jobs();
 
 	// create a dynamic page for each job in the db
 	foreach($jobs as $job){
@@ -176,10 +173,10 @@
 			</tr>
 			<?php foreach ($jobs as $job) : ?>
 			<tr>
-				<td><a href="<?php echo JOB_URL; ?><?php echo $job['job_title']; ?>.php"><?php echo $job['job_title']; ?></a></td>
+				<td><a href="<?php echo JOB_URL; ?><?php echo $job['../util/job_title']; ?>.php"><?php echo $job['job_title']; ?></a></td>
 				<td><?php echo $job['dept']; ?></td>
 				<td><?php echo $job['location']; ?></td>
-				<td><a href="<?php echo JOB_URL; ?><?php echo $job['job_title']; ?>.php" class="btn btn-success">Apply</a></td>
+				<td><a href="<?php echo JOB_URL; ?><?php echo $job['../util/job_title']; ?>.php" class="btn btn-success">Apply</a></td>
 			</tr>
 			<?php endforeach; ?>
 		</table>

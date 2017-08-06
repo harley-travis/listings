@@ -2,7 +2,7 @@
 include('../header.php');
 include('../left-col.php');
 ?>
-<h2>Company Bio</h2>
+<h2>Add A Company Bio</h2>
 
 
 <form action="<?php echo D_ROOT; ?>/view/profile/index.php" method="post" id="company-bio">
@@ -10,10 +10,10 @@ include('../left-col.php');
 	
 	<div class="form-group">
 		<label for="">Enter Bio</label>
-		<textarea name="company-bop" class="form-control" rows="3" placeholder="Insert company bio"></textarea>
+		<textarea name="bio" class="form-control" rows="3" placeholder="Insert company bio"></textarea>
 	</div>
 	
-	<a href="<?php echo D_ROOT; ?>/view/profile/index.php?action=view-profile" class="btn btn-primary">Go Back</a>
+	<a href="<?php echo D_ROOT; ?>/view/profile/index.php?action=view-profile" class="btn btn-primary">View Profile</a>
 	<input type="submit" value="Add" class="btn btn-success">
 
 </form>

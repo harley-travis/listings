@@ -14,6 +14,15 @@
 			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
 			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
 			
+			return $ftp_conn;
+			
+		}
+		
+		public static function closeFTP(){
+			
+			$ftp_server = "sundance.dreamhost.com";
+			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+			ftp_close($ftp_conn);
 		}
 		
 		public static function createNewDir($companyName){

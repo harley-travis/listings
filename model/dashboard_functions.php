@@ -34,8 +34,13 @@ class LoginDatabase{
 		$statement->bindValue(':password', $password);
 		$statement->bindValue(':timestamp', $timestamp);
 		$statement->execute();
-		$valid = ($statement->rowCount() == 1);
+		//$valid = ($statement->rowCount() == 1);
+		$valid = ($statement->$email);
 		$statement->closeCursor();
+		
+		echo $valid.": is the username";
+
+		
 		return $valid;
 
 	}

@@ -20,14 +20,14 @@
 	// controll the action the user selects
 	switch ($action){
 		case "view-applicants":
-			$applicants = Applicants::get_applicants();
+			$applicants = Applicants::get_applicants_by_user_id($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('applicants.php');
 			include('../footer.php');
 			break;
 		case "archive-applicants":
-			$applicants = Applicants::get_archive_applicants();
+			$applicants = Applicants::get_archive_applicants($_SESSION['company_id']);
 			
 			include('../header.php');
 			include('../left-col.php');
@@ -46,7 +46,7 @@
 			
 			// send array to function
 			Applicants::marked_archived($marked);
-			$applicants = Applicants::get_applicants();
+			$applicants = Applicants::get_applicants_by_user_id($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('applicants.php');
@@ -55,7 +55,7 @@
 		case "marked-archived":
 			Applicants::marked_archived();
 			
-			$applicants = Applicants::get_applicants();
+			$applicants = Applicants::get_applicants_by_user_id($_SESSION['company_id']);
 			include('applicants.php');
 			break;
 		case "markActive":
@@ -70,7 +70,7 @@
 			
 			// send array to function
 			Applicants::marked_active($marked);
-			$applicants = Applicants::get_applicants();
+			$applicants = Applicants::get_applicants_by_user_id($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('applicants.php');
@@ -89,7 +89,7 @@
 			
 			// send array to function
 			Applicants::phone($marked);
-			$applicants = Applicants::get_all_phone();
+			$applicants = Applicants::get_all_phone($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('phone.php');
@@ -108,7 +108,7 @@
 			
 			// send array to function
 			Applicants::one($marked);
-			$applicants = Applicants::get_all_one();
+			$applicants = Applicants::get_all_one($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('first.php');
@@ -127,7 +127,7 @@
 			
 			// send array to function
 			Applicants::two($marked);
-			$applicants = Applicants::get_all_two();
+			$applicants = Applicants::get_all_two($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('second.php');
@@ -146,7 +146,7 @@
 			
 			// send array to function
 			Applicants::three($marked);
-			$applicants = Applicants::get_all_three();
+			$applicants = Applicants::get_all_three($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('third.php');
@@ -165,7 +165,7 @@
 			
 			// send array to function
 			Applicants::hired($marked);
-			$applicants = Applicants::get_all_hired();
+			$applicants = Applicants::get_all_hired($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('hired.php');
@@ -173,7 +173,7 @@
 			
 			break;
 		case "view-hired":
-			$applicants = Applicants::get_all_hired();
+			$applicants = Applicants::get_all_hired($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('hired.php');
@@ -181,35 +181,35 @@
 			break;
 			
 		case "stage-phone":
-			$applicants = Applicants::get_all_phone();
+			$applicants = Applicants::get_all_phone($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('phone.php');
 			include('../footer.php');
 			break;
 		case "stage-one":
-			$applicants = Applicants::get_all_one();
+			$applicants = Applicants::get_all_one($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('first.php');
 			include('../footer.php');
 			break;
 		case "stage-two":
-			$applicants = Applicants::get_all_two();
+			$applicants = Applicants::get_all_two($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('second.php');
 			include('../footer.php');
 			break;
 		case "stage-three":
-			$applicants = Applicants::get_all_three();
+			$applicants = Applicants::get_all_three($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('third.php');
 			include('../footer.php');
 			break;
 		default: 
-			$applicants = Applicants::get_applicants();
+			$applicants = Applicants::get_applicants_by_user_id($_SESSION['company_id']);
 			include('applicants.php');
 	}
 

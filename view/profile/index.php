@@ -16,7 +16,6 @@
 	require_once  __DIR__ . "/../header.php";	
 	require_once  __DIR__ . "/../../model/database.php";
 	require_once  __DIR__ . "/../../model/login-dashboard.php";
-	require_once  __DIR__ . "/../../model/ftp.php";
 
 	// controll the action the user selects
 	switch ($action){
@@ -105,7 +104,14 @@
 			include('../footer.php');
 			break;
 		case "company-bio":
-			echo " company bio";
+			$bio = filter_input(INPUT_POST, 'bio');
+			LoginDatabase::add_bio($bio);
+			include('../header.php');
+			include('../left-col.php');
+			include('profile.php');
+			include('../footer.php');
+			break;
+		case "edit-bio":
 			break;
 		case "embed":
 			include('../header.php');

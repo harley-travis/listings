@@ -13,7 +13,6 @@
 		<th>Last Name</th>
 		<th>Email</th>
 		<th>Role</th>
-		<th>Job Title</th>
 		<th>Edit</th>
 		<th>Delete</th>
 	</tr>
@@ -23,7 +22,6 @@
 		<td><?php echo $user['user_lastName']; ?></td>
 		<td><?php echo $user['user_email']; ?></td>
 		<td><?php echo $user['user_type']; ?></td>
-		<td><?php echo $user['job_title']; ?></td>
 		<td>
 			
 			<form action="<?php echo D_ROOT; ?>/view/users/index.php" method="post">

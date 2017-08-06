@@ -68,11 +68,7 @@
 			$jobTitle = filter_input(INPUT_POST, 'job-title');
 
 
-			if($user_id == NULL || $user_id == FALSE || $userFirstName == NULL || $userFirstName == FALSE || $userLastName == NULL || $userLastName == FALSE || $email == NULL || $email == FALSE || $password == NULL || $password == FALSE || $role == FALSE || $role == NULL || $jobTitle == NULL || $jobTitle == FALSE){
-
-				echo "There was an error editing the user, please try again.";
-
-			}else{
+			
 				// edit the user in the db, get the users and display on the users page
 				LoginDatabase::edit_user($user_id, $userFirstName, $userLastName, $email, $password, $role, $jobTitle);
 				$users = LoginDatabase::get_users();
@@ -80,7 +76,7 @@
 				include('../left-col.php');
 				include('users.php');
 				include('../footer.php');
-			}
+			
 			break;
 		case 'edit-user-id':
 			// get the user id to make changes

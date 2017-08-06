@@ -51,11 +51,6 @@ include('../left-col.php');
 				<label for="department">Department</label><span class="red-txt">*</span>
 				<input type="text" class="form-control" name="department" placeholder="Department">
 			</div>
-
-			<div class="form-group">
-				<label for="closeDate">Close Date</label><span class="red-txt">*</span>
-				<input type="text" class="form-control" name="closeDate" id="datepicker">
-			</div>
 	
 		<div class="pg-btns">
 			<a href="<?php echo D_ROOT; ?>/view/jobs/index.php?action=view-jobs" class="btn btn-primary">Go Back</a>

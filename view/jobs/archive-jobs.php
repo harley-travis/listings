@@ -1,3 +1,20 @@
+<div class="container-fluid page-title">
+	<div class="col-md-6 col-xs-12 page-title-wrapper">
+		<h2>Archived Jobs</h2>
+	</div><!-- container -->
+	<div class="col-md-6 col-xs-12 btn-wrapper">
+		<form class="form-inline">
+				<div class="form-group">
+					<label for="">Action:</label>
+					<select class="form-control">
+					  <option value="">- select -</option>
+					  <option value="volvo">Marked Active</option>
+					</select>
+				</div>
+		<a href="<?php echo D_ROOT; ?>/view/jobs/add-job.php" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Job</a>
+		<a href="<?php echo D_ROOT; ?>/view/jobs/index.php?action=view-jobs" class="btn btn-info"><span class="glyphicon glyphicon-okay-sign" aria-hidden="true"></span> View Jobs</a>
+	</div>
+</div><!-- page-title -->
 <table class="table table-striped table-hover">
 	<tr>
 		<th>Action</th>

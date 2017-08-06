@@ -4,18 +4,36 @@
 class LoginDatabase{
 
 	// register user at the login screen
-	public static function register($email, $password, $userFirstName, $userLastName){
+	public static function register($email, $password, $userFirstName, $userLastName, $company){
 		$db = Database::getDB();
 		$password = sha1($email . $password); // encrypt the password and email
+		
 		$query = 'INSERT INTO users (user_email, user_password, user_firstName, user_lastName)
-				  VALUES (:email, :password, :user_firstName, :user_lastName)';
+				  VALUES (:email, :password, :user_firstName, :user_lastName);
+				  
+				  INSERT INTO company (company_name)
+				  VALUES (:company_name);
+				  
+				  UPDATE users
+				  INNER JOIN company
+				  SET users.company_id = company.company_id
+				  WHERE company.company_name = :company_name
+				  AND users.user_email = :email;
+				  
+				  UPDATE company
+				  INNER JOIN users
+				  SET company.user_id = users.user_id
+				  WHERE company.company_id = users.company_id';
+		
 		$statement = $db->prepare($query);
 		$statement->bindValue(':email', $email);
 		$statement->bindValue(':password', $password);
 		$statement->bindValue(':user_firstName', $userFirstName);
 		$statement->bindValue(':user_lastName', $userLastName);
+		$statement->bindValue(':company_name', $company);
 		$statement->execute();
 		$statement->closeCursor();
+		
 	}
 
 	// log the user in for the designer access
@@ -37,29 +55,11 @@ class LoginDatabase{
 		$statement->execute();
 		$valid = ($statement->rowCount() == 1);
 		$statement->closeCursor();		
-		
+
 		return $valid;
 
 	}
-	
-	public function find_current_user($userID){
-		$db = Database::getDB();
-		
-		$query = 'SELECT user_firstName FROM users
-				  WHERE user_id = :userID';
-		
-		$statement = $db->prepare($query);
-		$statement->bindValue(':userID', $userID);
-		$statement->execute();
-		$userName = $statement->fetch();
-		$statement->closeCursor();	
-		
-		print_r($userName);
-		
-		return $userName;
-		
-	}
-		
+			
 	// view the users
 	public static function get_users(){
 		$db = Database::getDB();
@@ -72,17 +72,58 @@ class LoginDatabase{
 		return $users;    
 	}
 	
-	// locate the user by ID
-	public static function get_user_by_id($user_id){
+	// locate the username by email 
+	public static function get_username($email){
 		$db = Database::getDB();
-		$query = 'SELECT * FROM users
-				  WHERE user_id = :user_id';
+		
+		$query = 'SELECT user_firstName 
+			      FROM users 
+				  WHERE user_email = :email';
+		
 		$statement = $db->prepare($query);
-		$statement->bindValue(":user_id", $user_id);
+		$statement->bindValue(':email', $email);
 		$statement->execute();
 		$user = $statement->fetch();
+		$username = $user[0];
+		$statement->closeCursor();	
+		
+		return $username;
+	}
+	
+	// locate the user_id by their email 
+	public static function get_user_by_id($email){
+		$db = Database::getDB();
+		
+		$query = 'SELECT user_id 
+			      FROM users 
+				  WHERE user_email = :email';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':email', $email);
+		$statement->execute();
+		$user = $statement->fetch();
+		$user_id = $user[0];
 		$statement->closeCursor();
-		return $user;
+		
+		return $user_id;
+	}
+	
+	// locate the company id based on the user_id
+	public static function get_company_by_user_id($user_id){
+		$db = Database::getDB();
+		
+		$query = 'SELECT company_id 
+			      FROM users 
+				  WHERE user_id = :user_id';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':user_id', $user_id);
+		$statement->execute();
+		$company = $statement->fetch();
+		$company_id = $company[0];
+		$statement->closeCursor();
+		
+		return $company_id;
 	}
 
 	// edit the user
@@ -141,6 +182,34 @@ class LoginDatabase{
 		$statement->bindValue(':date_user_created', $dateCreated);
 		$statement->execute();
 		$statement->closeCursor();
+	}
+	
+	public static function add_bio($bio){
+		$db = Database::getDB();
+		
+		$query = 'INSERT INTO company
+					(bio)
+					VALUES
+					(:bio)';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':bio', $bio);
+		$statement->execute();
+		$statement->closeCursor();
+		
+	}
+	
+	public static function edit_bio($bio){
+		$db = Database::getDB();
+		
+		$query = 'UPDATE company
+				  SET bio            = :bio';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':bio', $bio);
+		$statement->execute();
+		$statement->closeCursor();
+		
 	}
 	
 }

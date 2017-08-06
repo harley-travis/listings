@@ -15,5 +15,9 @@ define("DESIGNER_LOGIN",    	 dirname(__FILE__)."/model/designer_login.php");
 define("DASHBOARD_FUNCTIONS",    dirname(__FILE__)."/model/dashboard_functions.php");
 define("LEFT_COL",    			 dirname(__FILE__)."/view/left-col.php");
 
+// define ftp connection
+$ftp_server 	= "sundance.dreamhost.com";
+$ftp_username 	= 'trahar20';
+$ftp_userpass	= 'Spiderman1!';
 
 ?>

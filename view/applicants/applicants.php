@@ -1,3 +1,11 @@
+<style>
+form.form-inline {
+    text-align: right;
+    padding-left: 50px;
+}
+</style>
+
+
 <div class="container-fluid page-title">
 	<div class="col-md-3 col-xs-12 page-title-wrapper">
 		<h2>Applicants</h2>
@@ -7,6 +15,7 @@
 				<div class="form-group">
 					<select name="action" class="form-control">
 					  <option value="">- Select View -</option>
+					  <option value="archive-applicants">Archived Applicants</option>
 					  <option value="stage-phone">Phone Interviews</option>
 					  <option value="stage-one">1st Interviews</option>
 					  <option value="stage-two">2nd Inteviews</option>
@@ -18,7 +27,7 @@
 		
 			<form action="<?php echo D_ROOT; ?>/view/applicants/index.php" method="post" class="form-inline">
 				<div class="form-group">
-					<label for="">Action:</label>
+					<label for=""></label>
 					<select name="action" class="form-control">
 					  <option value="">- Select Action -</option>
 					  <option value="notQualified">Not Qualified / Archive</option>
@@ -30,8 +39,9 @@
 					</select>
 				</div>
 				<input type="submit" class="btn btn-success" value="Apply">
-		<a href="<?php echo D_ROOT; ?>/view/applicants/index.php?action=archive-applicants" class="btn btn-info">Archived Applicants</a>
+<!--		<a href="<?php echo D_ROOT; ?>/view/applicants/index.php?action=archive-applicants" class="btn btn-info">Archived Applicants</a>-->
 	</div>
+	
 </div><!-- page-title -->
 
 <table class="table table-striped table-hover">

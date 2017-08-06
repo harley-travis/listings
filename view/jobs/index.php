@@ -36,12 +36,11 @@
 				echo "There was an error adding the job. Please try again.";
 			}else{
 				$newJob = new Jobs($jobTitle, $description, $qualifications, $add_info, $salary, $location, $department); // store into object
-				Jobs::add_job($newJob); // send to the function
-				$jobs = Jobs::get_all_jobs(); // grab the data and view
+				Jobs::add_job($newJob, $_SESSION['company_id']); // send to the function
+				$jobs = Jobs::get_all_jobs($_SESSION['company_id']); // grab the data and view
 			
 				include('../header.php');
 				include('../left-col.php');
-				include('title.php');
 				include('jobs.php');
 				include('../footer.php');
 			}
@@ -58,12 +57,11 @@
 			$location = filter_input(INPUT_POST, 'location');
 			$department = filter_input(INPUT_POST, 'department');
 			
-			Jobs::edit_job($job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department);
-			$jobs = Jobs::get_all_jobs(); // grab the data and view
+			Jobs::edit_job($job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department, $_SESSION['company_id']);
+			$jobs = Jobs::get_all_jobs($_SESSION['company_id']); // grab the data and view
 
 			include('../header.php');
 			include('../left-col.php');
-			include('title.php');
 			include('jobs.php');
 			include('../footer.php');
 						
@@ -71,7 +69,7 @@
 		case "edit-job-id":
 			
 			$job_id = $_POST['job_id']; // get the job id
-			$job = Jobs::get_job_by_id($job_id); // get the job id from the db and put it in a var
+			$job = Jobs::get_job_by_id($job_id, $_SESSION['company_id']); // get the job id from the db and put it in a var
 
 			include('../header.php');
 			include('../left-col.php');
@@ -84,10 +82,9 @@
 				echo "There was an error deleting the band";
 			}else{
 				Jobs::delete_job($job_id);
-				$jobs = Jobs::get_all_jobs();
+				$jobs = Jobs::get_all_jobs($_SESSION['company_id']);
 				include('../header.php');
 				include('../left-col.php');
-				include('title.php');
 				include('jobs.php');
 				include('../footer.php');
 			}
@@ -98,19 +95,37 @@
 				echo "There was an error deleting the band";
 			}else{
 				Jobs::marked_archived($job_id);
-				$jobs = Jobs::get_all_archive_jobs();
+				$jobs = Jobs::get_all_archive_jobs($_SESSION['company_id']);
 				include('../header.php');
 				include('../left-col.php');
-				include('title.php');
 				include('archive-jobs.php');
 				include('../footer.php');
 			}
 			break;
-		case "archive-jobs":
-			$jobs = Jobs::get_all_archive_jobs();
+		case "archive-many-jobs":
+			
+			$values = $_POST['job_action'];     // put values into array
+			$marked = array(); 					     // put the marked box values into an array
+			
+			// put values into the array
+			foreach($values as $value){
+				$marked[] = $value;
+			}
+			
+			// send array to function
+			Jobs::marked_many_archived($marked);
+			$jobs = Jobs::get_all_archive_jobs($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
-			include('title.php');
+			include('archive-jobs.php');
+			include('../footer.php');
+
+			
+			break;
+		case "archive-jobs":
+			$jobs = Jobs::get_all_archive_jobs($_SESSION['company_id']);
+			include('../header.php');
+			include('../left-col.php');
 			include('archive-jobs.php');
 			include('../footer.php');
 			break;
@@ -121,25 +136,22 @@
 				echo "There was an error deleting the band";
 			}else{
 				Jobs::marked_active($job_id);
-				$jobs = Jobs::get_all_jobs();
+				$jobs = Jobs::get_all_jobs($_SESSION['company_id']);
 				include('../header.php');
 				include('../left-col.php');
-				include('title.php');
 				include('jobs.php');
 				include('../footer.php');
 			}
 			break;
 		case "view-jobs":
-			$jobs = Jobs::get_all_jobs();
+			$jobs = Jobs::get_all_jobs($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
-			include('title.php');
 			include('jobs.php');
 			include('../footer.php');
 			break;
 		default: 
-			$jobs = Jobs::get_all_jobs();
-			include('title.php');
+			$jobs = Jobs::get_all_jobs($_SESSION['company_id']);
 			include('jobs.php');
 	}
 
