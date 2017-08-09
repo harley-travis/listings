@@ -46,6 +46,9 @@
 				// get the company id
 				$_SESSION['company_id'] = LoginDatabase::get_company_by_user_id($_SESSION['user_id']);
 				
+				// get the company name
+				$_SESSION['company_name'] = LoginDatabase::get_company_by_name($_SESSION['company_id']);
+				
 				// display applicants
 				$applicants = Applicants::get_applicants_by_user_id($_SESSION['company_id']);
 				
@@ -87,6 +90,7 @@
 			// url locations for directories that need to be created
 			$dirUrl 		= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'];
 			$jobsDirUrl 	= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'] . "/jobs";
+			$jDirUrl 		= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'] . "/jobs/j";
 			$resumeDirUrl 	= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'] . "/resumes";
 			
 			// create directories for the user account
@@ -95,6 +99,13 @@
 				// create a directory for the jobs folder
 				if(ftp_mkdir($ftp_conn, $jobsDirUrl)){
 
+					if(ftp_mkdir($ftp_conn, $jDirUrl)){
+						
+					}else{
+						echo "There was an error creating the J directory for the new user";
+					}
+					
+					
 				}else{
 					echo "There was an error creating the jobs directory for the new user";
 				}

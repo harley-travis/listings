@@ -38,15 +38,18 @@
 			$userLastName = filter_input(INPUT_POST, 'userLastName');
 			$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 			$password = filter_input(INPUT_POST, 'password');
+			$userRole = $_POST['userRole'];
+			
+			echo $userFirstName . $userLastName . $email . $password . $userRole . $_SESSION['company_id'] . "datas";
 
 			if($userFirstName == NULL || $userFirstName == FALSE ||  $userLastName == NULL || $userLastName == FALSE || $email == NULL || $email == FALSE || $password == NULL || $password == FALSE){
 
 				echo "There was an error adding a new user, please try again.";
 			}else{
 				//add the user to the db, put the data in a variable, display the page
-				$newUser = new Users($userFirstName, $userLastName, $email, $password);
-				LoginDatabase::add_user($newUser);
-				$users = LoginDatabase::get_users();
+				//$newUser = new Users($userFirstName, $userLastName, $email, $password, $userRole, $_SESSION['company_id']);
+				LoginDatabase::add_user($userFirstName, $userLastName, $email, $password, $userRole, $_SESSION['company_id']);
+				$users = LoginDatabase::get_users($_SESSION['company_id']);
 				include('../header.php');
 				include('../left-col.php');
 				include('users.php');
@@ -59,7 +62,7 @@
 			// if password = password in db then change password. 
 			// make a show password btn 
 
-			$user_id = filter_input(INPUT_POST, 'user_id');
+			$user_post_id = filter_input(INPUT_POST, 'user_id');
 			$userFirstName = filter_input(INPUT_POST, 'userFirstName');
 			$userLastName = filter_input(INPUT_POST, 'userLastName');
 			$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -70,8 +73,8 @@
 
 			
 				// edit the user in the db, get the users and display on the users page
-				LoginDatabase::edit_user($user_id, $userFirstName, $userLastName, $email, $password, $role, $jobTitle);
-				$users = LoginDatabase::get_users();
+				LoginDatabase::edit_user($user_post_id, $userFirstName, $userLastName, $email, $password, $role, $jobTitle);
+				$users = LoginDatabase::get_users($_SESSION['company_id']);
 				//include('../header.php');
 				include('../left-col.php');
 				include('users.php');
@@ -83,10 +86,10 @@
 			include('../header.php');
 			include('../left-col.php');
 			// get the user id
-			$user_id = $_POST['user_id'];
+			$user_post_id = $_POST['user_id'];
 
 			// get the user info from the db and put it in a var
-			$user = LoginDatabase::get_user_by_id($user_id);
+			$user = LoginDatabase::get_user_edit_id($user_post_id);
 
 			// redirect to the edit page
 			include('edit-user.php');
@@ -101,7 +104,7 @@
 				echo "There was an error deleting the user";
 			}else{
 				LoginDatabase::delete_user($user_id);
-				$users = LoginDatabase::get_users();
+				$users = LoginDatabase::get_users($_SESSION['company_id']);
 				include('../header.php');
 				include('../left-col.php');
 				include('users.php');
@@ -110,14 +113,14 @@
 			break;
 		case 'view-users':
 			// view all users
-			$users = LoginDatabase::get_users();
+			$users = LoginDatabase::get_users($_SESSION['company_id']);
 			include('../header.php');
 			include('../left-col.php');
 			include('users.php');
 			include('../footer.php');
 			break;
 		default:
-			$users = LoginDatabase::get_users();
+			$users = LoginDatabase::get_users($_SESSION['company_id']);
 			include('users.php');
 	}
 

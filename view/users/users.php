@@ -21,7 +21,26 @@
 		<td><?php echo $user['user_firstName']; ?></td>
 		<td><?php echo $user['user_lastName']; ?></td>
 		<td><?php echo $user['user_email']; ?></td>
-		<td><?php echo $user['user_type']; ?></td>
+		<td>
+			
+			<?php 
+				
+				$user_type = $user['user_type']; 
+				if($user_type == 0){
+					echo "Super Mega Admin";
+				}else if($user_type == 1){
+					echo "Super Admin";
+				}else if($user_type == 2){
+					echo "Manager";
+				}else if($user_type == 3){
+					echo "User";
+				}else{
+					echo "there was an error collecting the interview stage. Please try again.";
+				}
+			
+			?>
+			
+		</td>
 		<td>
 			
 			<form action="<?php echo D_ROOT; ?>/view/users/index.php" method="post">

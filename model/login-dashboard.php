@@ -8,8 +8,8 @@ class LoginDatabase{
 		$db = Database::getDB();
 		$password = sha1($email . $password); // encrypt the password and email
 		
-		$query = 'INSERT INTO users (user_email, user_password, user_firstName, user_lastName)
-				  VALUES (:email, :password, :user_firstName, :user_lastName);
+		$query = 'INSERT INTO users (user_email, user_password, user_firstName, user_lastName, user_type)
+				  VALUES (:email, :password, :user_firstName, :user_lastName, 1);
 				  
 				  INSERT INTO company (company_name)
 				  VALUES (:company_name);
@@ -61,10 +61,17 @@ class LoginDatabase{
 	}
 			
 	// view the users
-	public static function get_users(){
+	public static function get_users($company_id){
 		$db = Database::getDB();
-		$query = 'SELECT * FROM users';
+		
+		$query = 'SELECT * FROM users 
+                  INNER JOIN company 
+                  ON users.company_id = company.company_id 
+                  WHERE users.company_id = :company_id
+				  ORDER BY user_type';
+		
 		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
 		$statement->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
@@ -108,6 +115,19 @@ class LoginDatabase{
 		return $user_id;
 	}
 	
+	// locate the user by ID TO EDIT THEIR USER data
+	public static function get_user_edit_id($user_id){
+		$db = Database::getDB();
+		$query = 'SELECT * FROM users
+				  WHERE user_id = :user_id';
+		$statement = $db->prepare($query);
+		$statement->bindValue(":user_id", $user_id);
+		$statement->execute();
+		$user = $statement->fetch();
+		$statement->closeCursor();
+		return $user;
+	}
+	
 	// locate the company id based on the user_id
 	public static function get_company_by_user_id($user_id){
 		$db = Database::getDB();
@@ -125,6 +145,25 @@ class LoginDatabase{
 		
 		return $company_id;
 	}
+	
+	// locate the company id based on the user_id
+	public static function get_company_by_name($company_id){
+		$db = Database::getDB();
+		
+		$query = 'SELECT company_name 
+				  FROM company 
+				  WHERE company_id = :company_id';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$company = $statement->fetch();
+		$companyName = $company[0];
+		$statement->closeCursor();
+		
+		return $companyName;
+	}
+	
 
 	// edit the user
 	public static function edit_user($user_id, $userFirstName, $userLastName, $email, $password) {
@@ -159,26 +198,24 @@ class LoginDatabase{
 	}
 
 	//add a user
-	public static function add_user($newUser){
+	public static function add_user($userFirstName, $userLastName, $email, $password, $role, $company_id){
 		$db = Database::getDB();
-		
-		$userFirstName = $newUser->getUserFirstName();
-		$userLastName = $newUser->getUserLastName();
-		$email = $newUser->getUserEmail();
-		$password = $newUser->getUserPassword();
-		
+
+		$password = sha1($email . $password); // encrypt the password and email
 		$dateCreated = date("Y-m-d"); // put the date into a var
 		
 		$query = 'INSERT INTO users
-					(user_firstName, user_lastName, user_email, user_password, date_user_created)
+					(user_firstName, user_lastName, user_email, user_password, user_type, date_user_created, company_id)
 					VALUES
-					(:userFirstName, :userLastName, :email, :password, :date_user_created)';
+					(:userFirstName, :userLastName, :email, :password, :role, :date_user_created, :company_id)';
 
 		$statement = $db->prepare($query);
 		$statement->bindValue(':userFirstName', $userFirstName);
 		$statement->bindValue(':userLastName', $userLastName);
 		$statement->bindValue(':email', $email);
 		$statement->bindValue(':password', $password);
+		$statement->bindValue(':role', $role);
+		$statement->bindValue(':company_id', $company_id);
 		$statement->bindValue(':date_user_created', $dateCreated);
 		$statement->execute();
 		$statement->closeCursor();

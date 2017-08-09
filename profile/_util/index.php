@@ -1,8 +1,9 @@
 <?php 
 
 	// grab the db files
-	require_once  __DIR__ . "/../../../model/database.php";
-	require_once  __DIR__ . "/../../../model/applicant.php";
+	require_once  __DIR__ . "/../../config.php";
+	require_once  __DIR__ . "/../../model/database.php";
+	require_once  __DIR__ . "/../../model/applicant.php";
 
 	// snatch the variables from the form
 	$firstName = filter_input(INPUT_POST, 'applicant_firstName');
@@ -10,6 +11,7 @@
 	$email = filter_input(INPUT_POST, 'applicant_email', FILTER_VALIDATE_EMAIL);
 	$phone = filter_input(INPUT_POST, 'applicant_phone');
 	$job_id = filter_input(INPUT_POST, 'job_id');
+	$company_name = filter_input(INPUT_POST, 'company_name');
 
 	// validate this ish
 	if($firstName == NULL || $lastName == NULL || $email == NULL || $phone == NULL){
@@ -31,21 +33,18 @@
 		}else{
 
 			// ftp conn
-			$ftp_server   = "sundance.dreamhost.com";
-			$ftp_username = 'trahar20';
-			$ftp_userpass = 'Spiderman1!';
 			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
 			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
 
 			// create a folder for the applicant
-			$applicant_folder = "/careers.whitejuly.com/profile/white-july/resumes/". $lastName."_".$firstName ."/";
+			$applicant_folder = "/careers.whitejuly.com/profile/".$company_name."/resumes/". $lastName."_".$firstName ."/";
 			
 			if(ftp_mkdir($ftp_conn, $applicant_folder)){				 
 				
 				// file name and tmp file name
 				$resume = $_FILES["resume"]["name"];
 				
-				$resumeLocation = "/home/trahar20/careers.whitejuly.com/profile/white-july/resumes/". $lastName."_".$firstName ."/".$resume;
+				$resumeLocation = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/resumes/". $lastName."_".$firstName ."/".$resume;
 				
 				$tempResume = $_FILES["resume"]["tmp_name"];
 
@@ -53,8 +52,8 @@
 				move_uploaded_file($tempResume, $resumeLocation);
 				
 				// the new file location
-				$urlLocation = "/careers.whitejuly.com/profile/white-july/resumes/". $lastName."_".$firstName ."/".$resume;
-				$renameResume = "/careers.whitejuly.com/profile/white-july/resumes/". $lastName."_".$firstName ."/resume.pdf";
+				$urlLocation = "/careers.whitejuly.com/profile/".$company_name."/resumes/". $lastName."_".$firstName ."/".$resume;
+				$renameResume = "/careers.whitejuly.com/profile/".$company_name."/resumes/". $lastName."_".$firstName ."/". $lastName."_".$firstName ."_resume.pdf";
 				
 				// rename the resume file
 				ftp_rename($ftp_conn, $urlLocation, $renameResume);
@@ -63,9 +62,9 @@
 				echo "there was an error uploading your resume";
 			}
 
-			//ftp_close($ftp_conn);
+			ftp_close($ftp_conn);
 
-			include('../util/thank-you.php');
+			include('thank-you.php');
 
 		}
 		

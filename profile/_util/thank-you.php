@@ -28,11 +28,11 @@
 		<div class="success-icon"><span class="glyphicon glyphicon-ok-circle ok-icon" aria-hidden="true"></span></div>
 		<h1 class="green">Thank you for applying!</h1>
 		<h2 class="green">We will contact you if you are a good fit.</h2>
-		<p>Click <a href="https://www.careers.whitejuly.com/profile/white-july/jobs/jobs-view.php">here</a> to check out more jobs!</p>
 		<footer>
-			<span><?php echo date('Y'); ?> &copy; WhiteJuly.com | All Rights Reserved.</span>
+			<span>Powered by <a href="http://whitejuly.com" target="_blank" style="color: black;">White July</a> <?php echo date('Y'); ?> &copy; | All Rights Reserved.</span>
 		</footer>
 	</body>
 </html>
 
 
+ 

@@ -38,7 +38,10 @@
 				$newJob = new Jobs($jobTitle, $description, $qualifications, $add_info, $salary, $location, $department); // store into object
 				Jobs::add_job($newJob, $_SESSION['company_id']); // send to the function
 				$jobs = Jobs::get_all_jobs($_SESSION['company_id']); // grab the data and view
-			
+				
+				// create the job listings page 
+				Jobs::create_listings($ftp_server, $ftp_username, $ftp_userpass, $_SESSION['company_name'], $_SESSION['company_id']);
+				
 				include('../header.php');
 				include('../left-col.php');
 				include('jobs.php');
@@ -59,6 +62,9 @@
 			
 			Jobs::edit_job($job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department, $_SESSION['company_id']);
 			$jobs = Jobs::get_all_jobs($_SESSION['company_id']); // grab the data and view
+			
+			// create the job listings page 
+			Jobs::create_listings($ftp_server, $ftp_username, $ftp_userpass, $_SESSION['company_name'], $_SESSION['company_id']);
 
 			include('../header.php');
 			include('../left-col.php');
@@ -83,6 +89,10 @@
 			}else{
 				Jobs::delete_job($job_id);
 				$jobs = Jobs::get_all_jobs($_SESSION['company_id']);
+				
+				// create the job listings page 
+				Jobs::create_listings($ftp_server, $ftp_username, $ftp_userpass, $_SESSION['company_name'], $_SESSION['company_id']);
+				
 				include('../header.php');
 				include('../left-col.php');
 				include('jobs.php');
@@ -96,6 +106,10 @@
 			}else{
 				Jobs::marked_archived($job_id);
 				$jobs = Jobs::get_all_archive_jobs($_SESSION['company_id']);
+				
+				// create the job listings page 
+				Jobs::create_listings($ftp_server, $ftp_username, $ftp_userpass, $_SESSION['company_name'], $_SESSION['company_id']);
+				
 				include('../header.php');
 				include('../left-col.php');
 				include('archive-jobs.php');

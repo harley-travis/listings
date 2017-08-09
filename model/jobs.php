@@ -302,6 +302,71 @@ class Jobs{
 		}
 		
 	}
+	
+	// create jobs file in company dir
+	public static function create_listings($ftp_server, $ftp_username, $ftp_userpass, $company_name, $company_id){
+		
+		
+		// login FTP
+		$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+		$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+
+		// url locations for directories that need to be created
+		$listingsTemplate = '/home/trahar20/careers.whitejuly.com/profile/_util/listings.php';
+		$listings = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/jobs/listings.php";
+		$listingsFile = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/jobs/listings_header.php";
+		
+		// create listings header
+		$listings_header_file = fopen($listingsFile, "w");
+		
+		$header = '<?php
+
+						// get the database files
+						require_once  __DIR__ . "/../../../model/database.php";
+						require_once  __DIR__ . "/../../../model/jobs.php";
+
+						// define the url for the jobs link
+						define("JOB_URL", "https://careers.whitejuly.com/profile/'.$company_name.'/jobs/j/");
+
+						$list_company_id = '.$company_id.';
+						
+						$jobs = Jobs::get_all_jobs($list_company_id);
+						$company = Jobs::get_company_by_name($list_company_id);
+
+					?>';
+		
+		fwrite($listings_header_file, $header);
+		fclose($listings_header_file);
+		
+		// move job template file to company jobs dir		
+		copy($listingsTemplate, $listings);
+
+		// close FTP connection
+		ftp_close($ftp_conn);	
+	
+		// create a url for the company
+		$listings_url = "https://careers.whitejuly.com/profile/".$company_name."/jobs/listings.php";
+		
+		return $listings_url;
+	}
+	
+	// locate the company id based on the user_id
+	public static function get_company_by_name($company_id){
+		$db = Database::getDB();
+		
+		$query = 'SELECT company_name 
+				  FROM company 
+				  WHERE company_id = :company_id';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$company = $statement->fetch();
+		$companyName = $company[0];
+		$statement->closeCursor();
+		
+		return $companyName;
+	}
 
 }
 

@@ -25,12 +25,10 @@
 						
 						<li><a href="<?php echo D_ROOT; ?>/view/profile/bio.php"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Company Bio</a></li>
 
+						<li><a href="<?php echo D_ROOT; ?>/view/profile/bio.php"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Billing</a></li>
 						
+						<li><a href="<?php echo D_ROOT; ?>/view/profile/bio.php"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Feedback</a></li>
 						
-<!--
-						
-						<li><a href="<?php echo D_ROOT; ?>/index.php?action=settings"><span class="glyphicon glyphicon-cog dashboard-icon" aria-hidden="true"></span> Settings</a></li>
--->
 						
 						<li role="separator" class="divider"></li>
 						
@@ -55,9 +53,8 @@
 					
 					<li role="presentation"><a href="<?php echo D_ROOT; ?>/view/applicants/index.php?action=view-hired"><span class="glyphicon glyphicon-thumbs-up dashboard-icon" aria-hidden="true"></span> Hired Employees</a></li>
 					
-<!--					<li role="presentation"><a href="<?php echo D_ROOT; ?>/index.php?action=reports"><span class="glyphicon glyphicon-stats dashboard-icon" aria-hidden="true"></span> Reports</a></li>-->
+					<li role="presentation"><a href="<?php echo D_ROOT; ?>/index.php?action=reports"><span class="glyphicon glyphicon-stats dashboard-icon" aria-hidden="true"></span> Reports</a></li>
 					
-					<li role="presentation"><a href="<?php echo D_ROOT; ?>/model/logout.php"><span class="glyphicon glyphicon-log-out dashboard-icon" aria-hidden="true"></span> Logout</a></li>
 					
 				</ul>
 			</nav>

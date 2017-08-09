@@ -26,6 +26,15 @@ include('../left-col.php');
 			<input type="text" class="form-control" name="userLastName" placeholder="Last Name">
 		</div>
 		<div class="form-group">
+			<label for="userRole">User Role</label>
+			<select name="userRole" class="form-control">
+				<option>- Select User Role -</option>
+				<option value="1">Admin</option>
+				<option value="2">Manager</option>
+				<option value="3">User</option>
+			</select>
+		</div>
+		<div class="form-group">
 			<label for="email">Email address</label>
 			<input type="email" class="form-control" name="email" placeholder="Email">
 		</div>
