@@ -2,9 +2,9 @@
 
 class Jobs{
 	
-	private $job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $department;
+	private $job_id, $jobTitle, $description, $qualifications, $add_info, $salary, $location, $duration, $department;
 	
-	public function __construct($jobTitle, $description, $qualifications, $add_info, $salary, $location, $department){
+	public function __construct($jobTitle, $description, $qualifications, $add_info, $salary, $location, $duration, $department){
 		$this->jobTitle = $jobTitle;
 		$this->description = $description;
 		$this->qualifications = $qualifications;
@@ -12,6 +12,7 @@ class Jobs{
 		$this->salary = $salary;
 		$this->location = $location;
 		$this->department = $department;
+		$this->duration = $duration;
 	}
 	
 	public function getJobID(){
@@ -76,6 +77,14 @@ class Jobs{
 	
 	public function setDepartment($value){
 		$this->department = $value;
+	}
+	
+	public function getDuration(){
+		return $this->duration;
+	}
+	
+	public function setDuration($value){
+		$this->duration = $value;
 	}
 	
 	public static function get_all_jobs($company_id){
@@ -144,6 +153,8 @@ class Jobs{
 		return $jobs;    
 	}
 
+	// used for the OOP up above
+	// not using this anymore this is old and a pain to handle
 	public static function add_job($newJob, $company_id){
 		$db = Database::getDB();
 
@@ -155,13 +166,14 @@ class Jobs{
 		$salary = $newJob->getSalary();
 		$location = $newJob->getLocation();
 		$dept = $newJob->getDepartment();
+		$duration = $newJob->getDuration();
 		
-		//$timestamp = date("Y-m-d H:i:s A");
+		$timestamp = date("Y-m-d H:i:s A");
 
 		$query = "INSERT INTO jobs
-				(job_title, description, qualifications, add_info, salary, location, dept, company_id)
+				(job_title, description, qualifications, add_info, salary, location, duration, dept, company_id, date)
 				VALUES
-				(:job_title, :description, :qualifications, :add_info, :salary, :location, :dept, :company_id)";
+				(:job_title, :description, :qualifications, :add_info, :salary, :location, :duration, :dept, :company_id, :date)";
 
 		$statement = $db->prepare($query);
 		$statement->bindValue(':job_title', $job_title);
@@ -170,9 +182,37 @@ class Jobs{
 		$statement->bindValue(':add_info', $add_info);
 		$statement->bindValue(':salary', $salary);
 		$statement->bindValue(':location', $location);
+		$statement->bindValue(':duration', $duration);
 		$statement->bindValue(':dept', $dept);
 		$statement->bindValue(':company_id', $company_id);
-		//$statement->bindValue(':date', $timestamp);
+		$statement->bindValue(':date', $timestamp);
+		$statement->execute();
+		$statement->closeCursor();
+
+	}
+	
+	public static function add_the_job($jobTitle, $description, $qualifications, $add_info, $salary, $location, $duration, $compensation, $department, $company_id){
+		$db = Database::getDB();
+		
+		$timestamp = date("Y-m-d H:i:s A");
+
+		$query = "INSERT INTO jobs
+				(job_title, description, qualifications, add_info, salary, location, duration, compensation, dept, company_id, date)
+				VALUES
+				(:job_title, :description, :qualifications, :add_info, :salary, :location, :duration, :compensation, :dept, :company_id, :date)";
+
+		$statement = $db->prepare($query);
+		$statement->bindValue(':job_title', $jobTitle);
+		$statement->bindValue(':description', $description);
+		$statement->bindValue(':qualifications', $qualifications);
+		$statement->bindValue(':add_info', $add_info);
+		$statement->bindValue(':salary', $salary);
+		$statement->bindValue(':location', $location);
+		$statement->bindValue(':duration', $duration);
+		$statement->bindValue(':compensation', $compensation);
+		$statement->bindValue(':dept', $department);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->bindValue(':date', $timestamp);
 		$statement->execute();
 		$statement->closeCursor();
 
@@ -327,12 +367,13 @@ class Jobs{
 
 						// define the url for the jobs link
 						define("JOB_URL", "https://careers.whitejuly.com/profile/'.$company_name.'/jobs/j/");
+						define("LOGO_URL", "https://careers.whitejuly.com/profile/'.$company_name.'/logo/logo.png");
 
 						$list_company_id = '.$company_id.';
 						
 						$jobs = Jobs::get_all_jobs($list_company_id);
 						$company = Jobs::get_company_by_name($list_company_id);
-
+						
 					?>';
 		
 		fwrite($listings_header_file, $header);

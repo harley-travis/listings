@@ -2,22 +2,15 @@
 	font-family: $whiteJulyFont;
 }
 .logo-header {
-	 background: #f7d569;
-    background: -moz-linear-gradient(-45deg,#f7d569 0%,#e76b7c 100%);
-    background: -webkit-linear-gradient(-45deg,#f7d569 0%,#e76b7c 100%);
-    background: linear-gradient(135deg,#f7d569 0%,#e76b7c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7d569', endColorstr='#e76b7c',GradientType=1 );
+    background: #343a40 !important;
     padding: 10px;
     margin-bottom: 30px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
 }
-.yellow-pink {
-    background: #f7d569;
-    background: -moz-linear-gradient(-45deg,#f7d569 0%,#e76b7c 100%);
-    background: -webkit-linear-gradient(-45deg,#f7d569 0%,#e76b7c 100%);
-    background: linear-gradient(135deg,#f7d569 0%,#e76b7c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7d569', endColorstr='#e76b7c',GradientType=1 );
-}
-
 .white-logo {
     padding-bottom: 10px;
     color: $white;
@@ -35,7 +28,8 @@
     float: right;
 }
 .dropdown-menu {
-    left: -40px !important; // this is used to move the dropdwon to the left
+    left: unset !important;
+	right: 0;
 }
 .dashboard-icon{
 	color: $blue;
@@ -45,9 +39,6 @@
 	border-bottom: 1px solid $gray;
     margin-bottom: 20px;
 	padding: 0;
-}
-form.form-inline {
-    float: right;
 }
 .page-title-wrapper {
    

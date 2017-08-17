@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="jobs.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131467365060730566" remote="131467329000000000" Dst="2" />
-<file name="login-dashboard.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131467328460947173" remote="131467292400000000" Dst="2" />
-<file name="ftp_functions.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131405934679579575" remote="131405938800000000" Dst="2" />
-<file name="dashboard_functions.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131462694103212773" remote="131462658000000000" Dst="2" />
-<file name="feedback.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250498247879" remote="131405938800000000" Dst="2" />
-<file name="database.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131466869296178943" remote="131466832800000000" Dst="2" />
-<file name="designer_login.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131404934850463183" remote="131405938800000000" Dst="2" />
-<file name="logout.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250504782219" remote="131405938800000000" Dst="2" />
-<file name="products_db.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250483097356" remote="131405938800000000" Dst="2" />
-<file name="products.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250488188203" remote="131405938800000000" Dst="2" />
-<file name="products_db_original.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250485748271" remote="131405938800000000" Dst="2" />
-<file name="real_database.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250493681853" remote="131405938800000000" Dst="2" />
-<file name="secure_conn.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131385250506043063" remote="131405938800000000" Dst="2" />
-<file name="users.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131466441187694052" remote="131466405600000000" Dst="2" />
-<file name="users_db.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131406821283699125" remote="131466405600000000" Dst="2" />
-<file name="ftp.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131464286811760716" remote="131464270200000000" Dst="2" />
-<file name="applicant.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131442238793550650" remote="131442202800000000" Dst="2" />
-<file name="applicant_db.php" server="sundance.dreamhost.com/careers.whitejuly.com/" local="131463941050526191" remote="131463910200000000" Dst="2" />
+<file name="jobs.php" server="sundance.dreamhost.com//careers.whitejuly.com/" local="131472477010000000" remote="131472441000000000" Dst="2" />
+<file name="login-dashboard.php" server="sundance.dreamhost.com//careers.whitejuly.com/" local="131472193225291117" remote="131472157200000000" Dst="2" />
+<file name="applicant_db.php" server="sundance.dreamhost.com//careers.whitejuly.com/" local="131474167703651284" remote="131474131200000000" Dst="2" />
 </dwsync>

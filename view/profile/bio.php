@@ -10,7 +10,7 @@ include('../left-col.php');
 	
 	<div class="form-group">
 		<label for="">Enter Bio</label>
-		<textarea name="bio" class="form-control" rows="3" placeholder="Insert company bio"></textarea>
+		<textarea name="bio"></textarea>
 	</div>
 	
 	<a href="<?php echo D_ROOT; ?>/view/profile/index.php?action=view-profile" class="btn btn-primary">View Profile</a>
@@ -18,5 +18,7 @@ include('../left-col.php');
 
 </form>
 
-
+<script>
+	CKEDITOR.replace( 'bio' );
+</script>
 <?php include('../footer.php'); ?>

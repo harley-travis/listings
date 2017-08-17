@@ -8,3 +8,31 @@
 .dashboard-icon{
 	padding-right: 7px;
 }
+.left-col {
+    background-color: #f8f9fa !important;
+    border-right: #eee solid 1px;
+    position: fixed;
+    top: 99px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.content-wrapper {
+    margin-top: -29px;
+}
+.right-col {
+    padding-top: 35px;
+    float: right;
+    margin-top: 10em;
+}
+.ver-number {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    color: #a9a3a3;
+    font-style: italic;
+}

@@ -27,26 +27,30 @@
 			$description = filter_input(INPUT_POST, 'description');
 			$qualifications = filter_input(INPUT_POST, 'qualifications');
 			$add_info = filter_input(INPUT_POST, 'add_info');
-			$salary = filter_input(INPUT_POST, 'salary');
+			$compensation = $_POST['compensation'];
+			$salary = filter_input(INPUT_POST, 'salary-input');
 			$location = filter_input(INPUT_POST, 'location');
 			$department = filter_input(INPUT_POST, 'department');
+			$duration = $_POST['duration'];
 
+			// compensation
+			// 0 = hourly
+			// 1 = salary
+			
 			// validate 
-			if($jobTitle == NULL || $description == NULL || $qualifications == NULL || add_info == NULL || $salary == NULL || $location == NULL || $department == NULL){
-				echo "There was an error adding the job. Please try again.";
-			}else{
-				$newJob = new Jobs($jobTitle, $description, $qualifications, $add_info, $salary, $location, $department); // store into object
-				Jobs::add_job($newJob, $_SESSION['company_id']); // send to the function
+		
+				Jobs::add_the_job($jobTitle, $description, $qualifications, $add_info, $salary, $location, $duration, $compensation, $department, $_SESSION['company_id']); // send to the function
+			
 				$jobs = Jobs::get_all_jobs($_SESSION['company_id']); // grab the data and view
 				
 				// create the job listings page 
 				Jobs::create_listings($ftp_server, $ftp_username, $ftp_userpass, $_SESSION['company_name'], $_SESSION['company_id']);
-				
+			
 				include('../header.php');
 				include('../left-col.php');
 				include('jobs.php');
 				include('../footer.php');
-			}
+			
 			break;
 		case "edit-job":
 			

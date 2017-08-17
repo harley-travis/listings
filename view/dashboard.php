@@ -1,6 +1,12 @@
 <?php 
-include('header.php'); 
-include('left-col.php'); 
+	include('header.php'); 
+	include('left-col.php'); 
+
+	require_once  __DIR__ . "/../model/login-dashboard.php";
+	$num_applicants = LoginDatabase::get_number_applicants($_SESSION['company_id']);
+	$num_jobs = LoginDatabase::get_number_jobs($_SESSION['company_id']);
+
+
 ?>
 <style>
 	.dashboard-wrapper{
@@ -9,26 +15,46 @@ include('left-col.php');
 	}
 </style>
 
-
-<div class="col-md-6 col-xs-12">
-	<h2>Recent Job Postings</h2>
-	<hr>
-	<table class="table table-striped table-hover">
-		<tr>
-			<th>Position</th>
-			<th>Dept</th>
-			<th>Location</th>
-		</tr>
-		<?php foreach ($jobs as $job) : ?>
-		<tr>
-			<td><?php echo $job['job_title']; ?></td>
-			<td><?php echo $job['dept']; ?></td>
-			<td><?php echo $job['location']; ?></td>
-		</tr>
-		<?php endforeach; ?>
-	</table>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 col-xs-12 data-bubble-wrapper">
+			<div class="data-bubble green">
+				<span class="bubble-number">
+					<?php echo $num_applicants; ?>
+				</span>
+			</div>
+			<div class="data-bubble-tite">
+				<h4>Current Applicants</h4>
+			</div>
+		</div>
+		<div class="col-md-3 col-xs-12 data-bubble-wrapper">
+			<div class="data-bubble blue">
+				<span class="bubble-number">
+					<?php echo $num_jobs; ?>
+				</span>
+			</div>
+			<div class="data-bubble-tite">
+				<h4>Active Job Postings</h4>
+			</div>
+		</div>
+		<div class="col-md-6 col-xs-12 wj-info-box">
+			<div class="wj-ib-wrapper">
+				<h3>News From White July</h3>
+				<p>Good afternoon stranger, we have a lot of thinks cooking in the lab right now. We just wanted to keep you updated on some recent additions and changes that we have for you.</p>
+				<ul>
+					<li>Included new UI</li>
+					<li>Updated flow of new applicants</li>
+					<li>Fixed minor bugs</li>
+					<li>Created applicants profile page</li>
+					<li>Responsive job listings page</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="col-md-6 col-xs-12">
+
+
+<div class="dashboard-applicants-wrapper">
 	<h2>Recent Applicants</h2>
 	<hr>
 	<table class="table table-striped table-hover">

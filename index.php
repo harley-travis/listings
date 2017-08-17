@@ -39,6 +39,10 @@
 			if(LoginDatabase::dashboard_login($email, $password)){
 				$_SESSON['is_valid_user'] = true;
 				$isValidUser = $_SESSON['is_valid_user'];
+				
+				/**
+				 * SET UP THE USER SESSIONS
+				**/
 
 				// get user_id
 				$_SESSION['user_id'] = LoginDatabase::get_user_by_id($email); // grab the user_id
@@ -73,66 +77,183 @@
 		case 'register-account':
 			
 			// establish the variables. Then deal with it
-			$email 			= filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+			$email 			=   filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 			$password 		=	filter_input(INPUT_POST, 'password');
 			$verifyPassword = 	filter_input(INPUT_POST, 'verifyPassword');
 			$userFirstName	= 	filter_input(INPUT_POST, 'firstName');
 			$userLastName 	= 	filter_input(INPUT_POST, 'lastName');
 			$_SESSION['company_name'] 	= 	filter_input(INPUT_POST, 'companyName');
-									
-			// send info to function, insert into database
-			LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name']);
+			$agree = $_POST['agree'];	
 			
-			// login FTP
-			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
-			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+			// display error messages on the form 
 			
-			// url locations for directories that need to be created
-			$dirUrl 		= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'];
-			$jobsDirUrl 	= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'] . "/jobs";
-			$jDirUrl 		= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'] . "/jobs/j";
-			$resumeDirUrl 	= "/careers.whitejuly.com/profile/" . $_SESSION['company_name'] . "/resumes";
+			// verify the form data	
+			$email_entry = '';
+			$invalid_email = '';
+			$password_entry = '';
+			$verifyPassword_entry = '';
+			$passwordMatch = '';
+			$userFirstName_entry = '';
+			$userLastName_entry = '';
+			$company_entry = '';
+			$agree_entry = '';
+			$error_account = '';
 			
-			// create directories for the user account
-			if(ftp_mkdir($ftp_conn, $dirUrl)){	
-				
-				// create a directory for the jobs folder
-				if(ftp_mkdir($ftp_conn, $jobsDirUrl)){
-
-					if(ftp_mkdir($ftp_conn, $jDirUrl)){
-						
-					}else{
-						echo "There was an error creating the J directory for the new user";
-					}
-					
-					
-				}else{
-					echo "There was an error creating the jobs directory for the new user";
-				}
-				
-				// create the resumes directory
-				if(ftp_mkdir($ftp_conn, $resumeDirUrl)){
-					
-				}else{
-					echo "There was an error creating the resumes directory for the new user";
-				}
-				
-	
+			// welcome mesage
+			$newcommer = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Success!</strong> Your account has been created!</div>";
+			
+			// see if the email already exists in the database
+			$existing_email = LoginDatabase::already_user($email);
+			
+			if(empty($email)){
+				$email_entry = '<div class="alert alert-danger" role="alert">You must enter a valid email address to continue.</div>';
+				include('view/login/registration.php');
 			}else{
-				echo "there was an error creating the company directory. Please try again.";
+				if($email == $existing_email){
+					$invalid_email = '<div class="alert alert-danger" role="alert">This email already exists in the database. Please enter a different email.</div>';
+					include('view/login/registration.php');
+				}else{
+					if(empty($password)){
+						$password_entry = '<div class="alert alert-danger" role="alert">You must enter in a password.</div>';
+						include('view/login/registration.php');
+					}else{
+						if(empty($verifyPassword)){
+							$verifyPassword_entry = '<div class="alert alert-danger" role="alert">You must verify your password.</div>';
+							include('view/login/registration.php');
+						}else{
+							if($password != $verifyPassword){
+								$passwordMatch = '<div class="alert alert-danger" role="alert">Your password does not match. Please try again.</div>';
+								include('view/login/registration.php');
+							}else{
+								if(empty($userFirstName)){
+									$userFirstName_entry = '<div class="alert alert-danger" role="alert">You must enter your first name</div>';
+									include('view/login/registration.php');
+								}else{
+									if(empty($userLastName)){
+										$userFirstName_entry = '<div class="alert alert-danger" role="alert">You must enter your last name</div>';
+										include('view/login/registration.php');
+									}else{
+										if(empty($_SESSION['company_name'])){
+											$company_entry = '<div class="alert alert-danger" role="alert">You must enter your company name</div>';
+											include('view/login/registration.php');
+										}else{
+											// if the email does not exist and if the user accept the terms and the fields are not blank
+											if(!isset($agree)){
+												$agree_entry = '<div class="alert alert-danger" role="alert">You must agree to the terms of use before creating an account.</div>';
+												include('view/login/registration.php');
+											}else if(isset($agree)){
+
+												// send info to function, insert into database
+												LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name']);
+
+												// login FTP
+												$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+												$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+
+												// url locations for directories that need to be created
+												$dirUrl 			= URL_PATH . "/profile/" . $_SESSION['company_name'];
+												$jobsDirUrl 		= URL_PATH . "/profile/" . $_SESSION['company_name'] . "/jobs";
+												$jDirUrl 			= URL_PATH . "/profile/" . $_SESSION['company_name'] . "/jobs/j";
+												$resumeDirUrl 		= URL_PATH . "/profile/" . $_SESSION['company_name'] . "/resumes";
+												$applicantsDirUrl 	= URL_PATH . "/profile/" . $_SESSION['company_name'] . "/applicants";
+												$logoDirUrl 		= URL_PATH . "/profile/" . $_SESSION['company_name'] . "/logo";
+
+												// create directories for the user account
+												if(ftp_mkdir($ftp_conn, $dirUrl)){	
+
+													// create a directory for the jobs folder
+													if(ftp_mkdir($ftp_conn, $jobsDirUrl)){
+
+														if(ftp_mkdir($ftp_conn, $jDirUrl)){
+
+														}else{
+															echo "There was an error creating the J directory for the new user";
+														}
+
+
+													}else{
+														echo "There was an error creating the jobs directory for the new user";
+													}
+
+													// create the resumes directory
+													if(ftp_mkdir($ftp_conn, $resumeDirUrl)){
+
+													}else{
+														echo "There was an error creating the resumes directory for the new user";
+													}
+
+													// create the applicants directory
+													if(ftp_mkdir($ftp_conn, $applicantsDirUrl)){
+
+													}else{
+														echo "There was an error creating the resumes directory for the new user";
+													}
+
+													// create the logo directory
+													if(ftp_mkdir($ftp_conn, $logoDirUrl)){
+
+													}else{
+														echo "There was an error creating the resumes directory for the new user";
+													}
+
+
+												}else{
+													echo "there was an error creating the company directory. Please try again.";
+												}
+
+												// upload logo
+												$file_result = "";
+
+												// if there is an error uploading the file, display a message
+												if($_FILES["logo-file"]["error"] > 0){
+
+													$file_result .= "No file uploaded, or invalid file";
+													$file_result .= "Error code: " .$_FILES["logo-file"]["error"] . "<br>";
+
+												}else{
+
+													$logo_file = $_FILES["logo-file"]["name"];
+													$tempFile = $_FILES["logo-file"]["tmp_name"];
+
+													$logoLocation = FULL_PATH . "/profile/". $_SESSION['company_name'] . "/logo/". $logo_file;
+
+													// move the file to the specific folders
+													move_uploaded_file($tempFile, $logoLocation);
+
+													// the new file location
+													$urlLocation = URL_PATH . "/profile/".$_SESSION['company_name']."/logo/".$logo_file;
+													$renameLogo = $logoDirUrl."/logo.png";
+
+													// rename the resume file
+													ftp_rename($ftp_conn, $urlLocation, $renameLogo);
+													
+													// get user_id
+													$_SESSION['user_id'] = LoginDatabase::get_user_by_id($email); // grab the user_id
+													
+													// get the company id
+													$_SESSION['company_id'] = LoginDatabase::get_company_by_user_id($_SESSION['user_id']);
+													
+													// send img url to database
+													LoginDatabase::logo_url($renameLogo, $_SESSION['company_id']);
+
+												}
+
+												ftp_quit($ftp_conn);
+												echo $newcommer;
+												include('view/dashboard_login_view.php');
+
+											}else{
+												$error_account = '<div class="alert alert-danger" role="alert">There was an error creating your account. Please try again.</div>';
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
-			
-			ftp_close($ftp_conn);
-
-			// redirct to login page
-			echo "<div class='alert alert-success alert-dismissible' role='alert'>
-					<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
-						<span aria-hidden='true'>&times;</span>
-					</button>
-						<strong>Success!</strong> Your account has been created!</div>";
-
-			// refresh page and redirect to this page
-			header("Refresh:0; url=https://www.careers.whitejuly.com/index.php"); 
+				
 			break;
 		case 'reports':
 			// view the reports page

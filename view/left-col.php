@@ -58,5 +58,8 @@
 					
 				</ul>
 			</nav>
+			<div class="ver-number">
+				<span>ver. 2.0.1</span>
+			</div>
 		</div><!-- left-col -->
 		<div class="col-md-10 col-xs-12 right-col">

@@ -1,4 +1,3 @@
-<?php //require_once('model/secure_conn.php'); ?>
 
 <div class="login-content">
 	<div class="container-fluid login_block">

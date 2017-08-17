@@ -1,6 +1,6 @@
 /*
 Error: Undefined variable: "$blue".
-        on line 3 of C:/xampp/htdocs/phplearns/admin/assets/css/imports/left-col.scss
+        on line 3 of C:\Users\travis\Documents\white-july\assets\css\imports\left-col.scss
 
 1: .logo {
 2:     padding-bottom: 10px;
@@ -12,7 +12,7 @@ Error: Undefined variable: "$blue".
 8: .dashboard-icon{
 
 Backtrace:
-C:/xampp/htdocs/phplearns/admin/assets/css/imports/left-col.scss:3
+C:\Users\travis\Documents\white-july\assets\css\imports\left-col.scss:3
 C:/Program Files/Adobe/Adobe Dreamweaver CC 2017/ruby/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/script/tree/variable.rb:49:in `_perform'
 C:/Program Files/Adobe/Adobe Dreamweaver CC 2017/ruby/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/script/tree/node.rb:50:in `perform'
 C:/Program Files/Adobe/Adobe Dreamweaver CC 2017/ruby/lib/ruby/gems/2.2.0/gems/sass-3.4.20/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
@@ -58,4 +58,4 @@ C:/Program Files/Adobe/Adobe Dreamweaver CC 2017/ruby/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$blue\".\A         on line 3 of C:/xampp/htdocs/phplearns/admin/assets/css/imports/left-col.scss\A \A 1: .logo {\A 2:     padding-bottom: 10px;\A 3:     color: $blue;\A 4: }\A 5: .active .dashboard-icon{\A 6: 	color: #fff;\A 7: }\A 8: .dashboard-icon{"; }
+  content: "Error: Undefined variable: \"$blue\".\A         on line 3 of C:\Users\travis\Documents\white-july\assets\css\imports\left-col.scss\A \A 1: .logo {\A 2:     padding-bottom: 10px;\A 3:     color: $blue;\A 4: }\A 5: .active .dashboard-icon{\A 6: 	color: #fff;\A 7: }\A 8: .dashboard-icon{"; }

@@ -6,7 +6,48 @@
 	foreach($jobs as $job){
 		
 		$jobFile = fopen("j/".$job['job_title'].".php", "w") or die("Unable to open file!");
+		
+		// format the currency
+		setlocale(LC_MONETARY, 'en_US.UTF-8');
+		$money = $job['salary'];
+		$curr_format = '';
+		
+		// date format
+		$date_raw = $job['date'];
+		$createDate = new DateTime($date_raw);
+		$date = $createDate->format('Y-m-d');
+		
+		// work duration
+		$duration = '';
+		if($job['duration'] == 0){
+			$duration = "<i>Full-Time</i>";
+		}else if($job['duration'] == 1){
+			$duration = "<i>Part-Time</i>";
+		}else if($job['duration'] == 2){
+			$duration = "<i>Temporary</i>";
+		}else if($job['duration'] == 3){
+			$duration = "<i>Seasonal</i>";
+		}else if($job['duration'] == 4){
+			$duration = "<i>Contractual</i>";
+		}else{
+			echo "There was an error displaying the duration for this job";
+		}
+		
+		// display hourly or salary
+		if($job['compensation'] == 0){
+			$curr_format = "<b>Salary:</b> " . money_format('%.0n', $money) . "/hr";
+		}else if($job['compensation'] == 1){
+			$curr_format = "<b>Salary:</b> " . money_format('%.0n', $money) . "/yr";
+		}else if($job['compensation'] == 2){
+			$curr_format = "";
+		}else{
+			echo "There was an error displaying the compesation.";
+		}
+		
 		$txt = "
+			<?php 
+				require_once __DIR__ . '/../listings_header.php';
+			?>
 			<html>
 				<head>
 					<meta charset='utf-8'>
@@ -17,10 +58,12 @@
 						.post{
 							padding-left:120px;
 						}
-						.post-right{
+						.post-right {
 							background-color: #fafafa;
-							padding: 0 15px 0 15px;
-							height: 100vh;
+							padding: 35px 15px 0 15px;
+							height: 100%;
+							position: fixed;
+							right: 0;
 						}
 						.logo{
 							width: 100%;
@@ -29,10 +72,15 @@
 						ul{
 							padding: 0;
 							margin: 0;
+							margin-left: 35px;
 						}
-						li{
+						li.sidebar-list{
 							list-style: none;
 							padding-top: 15px;
+						}
+						.post-left {
+							padding-left: 50px;
+							padding-top: 35px;
 						}
 						.btn-wide {
 							width: 100%;
@@ -45,6 +93,7 @@
 						.footer{
 							padding-top: 35px;
 							padding-bottom: 35px;
+							font-size: 1.1rem;
 						}
 					</style>
 				</head>
@@ -52,18 +101,18 @@
 					
 					<div class='col-md-8 col-sm-6 col-xs-12 post-left'>
 					<div class='logo'>
-						<img src='https://careers.whitejuly.com/profile/white-july/logo.png' class='logo' alt=''>
+						<img src='<?php echo LOGO_URL; ?>' class='logo' alt=''>
 					</div>
 						<h1>".$job['job_title']."</h1>
 						<hr>
 						<h3>Description:</h3>
-						<p>".$job['description']."</p>
+						".$job['description']."
 						<hr>
 						<h3>Qualifications:</h3>
-						<p>".$job['qualifications']."</p>
+						".$job['qualifications']."
 						<hr>
 						<h3>Additional Information:</h3>
-						<p>".$job['add_info']."</p>
+						".$job['add_info']."
 						
 						<div class='footer'>
 							<span><?php echo date('Y'); ?> &copy; WhiteJuly.com | All Rights Reserved.</span>
@@ -71,18 +120,19 @@
 					</div>
 					
 					<div class='col-md-4 col-sm-6 col-xs-12 post-right'>
-						<h4>".$job['job_title']."</h4>
+						<h4>".$job['job_title']."</h4> ".$duration."
 						<hr>
 						<ul>
-							<li><b>Location:</b> " . $job['location'] . "</li>
-							<li><b>Department:</b> " . $job['dept'] . "</li>
-							<li><b>Salary:</b> $" . $job['salary'] . "</li>
+							<li class='sidebar-list'><b>Location:</b> " . $job['location'] . "</li>
+							<li class='sidebar-list'><b>Department:</b> " . $job['dept'] . "</li>
+							<li class='sidebar-list'>".$curr_format."</li>
+							<li class='sidebar-list'><b>Job Posted:</b> ".$date."</li>
 						</ul>
 						<button type='button' class='btn btn-success btn-wide' data-toggle='modal' data-target='#application_form'>
 						  Apply Today
 						</button>
 						<div class='powered'>
-							<b>Powered by White July</b>
+							<b>Powered by <a href='http://whitejuly.com' target='_blank'>White July</a></b>
 						</div>
 					</div>
 					
@@ -101,6 +151,7 @@
 								<input type='hidden' name='action' value='add-applicant'>
 								<input type='hidden' name='job_id' value='".$job['job_id']."'>
 								<input type='hidden' name='company_name' value='".$company."'>
+								<input type='hidden' name='company_id' value='".$company_id."'>
 							
 								<div class='form-group'>
 								  <label for='applicant_firstName'>First Name</label>
@@ -125,7 +176,7 @@
 								 <div class='form-group'>
 							  	  <label for='resume'>Upload Resume</label>
 								  <input type='file' name='resume' value='resume'>
-								  <p class='help-block'>Files no larger than 1Gig allowed.</p>
+								  <p class='help-block'>Files no larger than 1gig allowed.</p>
 							     </div> 						
 						
 						  </div>
@@ -167,10 +218,10 @@
 			</tr>
 			<?php foreach ($jobs as $job) : ?>
 			<tr>
-				<td><a href="<?php echo JOB_URL; ?><?php echo $job['job_title']; ?>.php"><?php echo $job['job_title']; ?></a></td>
+				<td><a href="<?php echo JOB_URL; ?><?php echo $job['job_title']; ?>.php" target="_blank"><?php echo $job['job_title']; ?></a></td>
 				<td><?php echo $job['dept']; ?></td>
 				<td><?php echo $job['location']; ?></td>
-				<td><a href="<?php echo JOB_URL; ?><?php echo $job['job_title']; ?>.php" class="btn btn-success">Apply</a></td>
+				<td><a href="<?php echo JOB_URL; ?><?php echo $job['job_title']; ?>.php" class="btn btn-success" target="_blank">View Position</a></td>
 			</tr>
 			<?php endforeach; ?>
 		</table>

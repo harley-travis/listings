@@ -24,22 +24,53 @@ include('../left-col.php');
 
 			<div class="form-group">
 				<label for="description">Description</label><span class="red-txt">*</span>
-				<textarea class="form-control" rows="3" name="description" placeholder="Enter job description"></textarea>
+				<textarea name="description"></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="qualifications">Qualifications</label><span class="red-txt">*</span>
-				<textarea class="form-control" rows="3" name="qualifications" placeholder="Enter job qualifications"></textarea>
+				<textarea name="qualifications"></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="add_info">Additional Information</label>
-				<textarea class="form-control" rows="3" name="add_info" placeholder="Enter additional information"></textarea>
+				<textarea name="add_info"></textarea>
 			</div>
 
 			<div class="form-group">
-				<label for="salary">Salary</label><span class="red-txt">*</span>
-				<input type="text" class="form-control" name="salary" placeholder="Salary">
+				<label for="compensation">Compensation</label><span class="red-txt">*</span><br>
+				
+				<div class="radio">
+					<label>
+						<input type="radio" name="compensation" value="0" id="hourly" checked> Hourly
+					</label>
+				</div>
+
+				<div class="radio">
+					<label>
+						<input type="radio" name="compensation" value="1" id="salary"> Salary
+					</label>
+				</div>
+				
+			</div>
+			
+			<div class="form-group">
+				<div class="input-group" id="salary-group">
+					<div class="input-group-addon">$</div>
+					<input type="text" class="form-control" name="salary-input" id="salary-amount" placeholder="Compensation amount"><!-- <div class="input-group-addon">/yr</div> -->
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="duration">Position Duration</label><span class="red-txt">*</span>
+				<select name="duration" class="form-control">
+					<option value="">- Select Duration -</option>
+					<option value="0">Full-Time</option>
+					<option value="1">Part-Time</option>
+					<option value="2">Temporary</option>
+					<option value="3">Seasonal</option>
+					<option value="4">By Contract</option>
+				</select>
 			</div>
 
 			<div class="form-group">
@@ -58,4 +89,33 @@ include('../left-col.php');
 		</div><!-- pg-btns -->
 	</form>
 </div><!-- form-wrapper -->
+
+<script>
+	
+	// radio button view 
+//	$(document).ready(function() {          
+//		$('#salary-group').hide(); 
+//		
+//	   $('input[type="radio"]').click(function() {
+//		   if($(this).attr('id') == 'salary') {
+//				$('#salary-group').show();           
+//				$('#hourly-group').hide();           
+//		   }
+//
+//		   else if($(this).attr('id') == 'hourly') {
+//				$('#salary-group').hide();   
+//				$('#hourly-group').show();   
+//		   }
+//		   
+//		   else{
+//			   consol.log("there was an error display the compensation radios");
+//		   }
+//	   });
+//	});
+
+	
+	CKEDITOR.replace( 'description' );
+	CKEDITOR.replace( 'qualifications' );
+	CKEDITOR.replace( 'add_info' );
+</script>
 <?php include('../footer.php'); ?>

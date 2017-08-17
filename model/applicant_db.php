@@ -2,16 +2,18 @@
 
 	class Applicants{
 		
-		public function get_applicants_by_user_id($user_id){
+		public function get_applicants_by_user_id($company_id){
 			$db = Database::getDB();
 			
 			$query = 'SELECT * FROM applicants 
 				      INNER JOIN jobs 
 					  ON applicants.job_id = jobs.job_id 
-					  WHERE applicants.company_id = :user_id';
+					  WHERE applicants.company_id = :company_id
+					  AND NOT applicants.stage = 6
+					  AND applicants.is_active = 0';
 			
 			$statement = $db->prepare($query);
-			$statement->bindValue(':user_id', $user_id);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$applicants = $statement->fetchAll();
 			$statement->closeCursor();
@@ -388,6 +390,55 @@
 			$statement->closeCursor();
 			
 			return $applicants;
+		}
+		
+		// add applicant
+		function add_applicant($firstName, $lastName, $email, $phone, $job_id){
+			$db = Database::getDB();
+
+			$timestamp = date("Y-m-d H:i:s A");
+
+			$query = 'INSERT INTO applicants
+					  (applicant_firstName, applicant_lastName, applicant_email, applicant_phone, date_applied, job_id)
+					  VALUES
+					  (:applicant_firstName, :applicant_lastName, :applicant_email, :applicant_phone, :date, :job_id)';
+
+			$statement = $db->prepare($query);
+			$statement->bindValue(':applicant_firstName', $firstName);
+			$statement->bindValue(':applicant_lastName', $lastName);
+			$statement->bindValue(':applicant_email', $email);
+			$statement->bindValue(':applicant_phone', $phone);
+			$statement->bindValue(':date', $timestamp);
+			$statement->bindValue(':job_id', $job_id);
+			$statement->execute();
+			$statement->closeCursor();
+
+		}
+		
+		// create the user profile page
+		public static function create_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, $company_name, $firstName, $lastName, $email, $phone, $job_id){
+		
+			// login FTP
+			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+			
+			// get the time 
+			$timestamp = date("Y-m-d H:i:s A"); // time applied
+			
+			// create page 
+			$applicant_profile = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/applicants/".$lastName."_".$firstName."/applicant_profile.php";
+			
+			// open the file
+			$applicant_file = fopen($applicant_profile, "w") or die("Unable to open file!");
+			
+			// this code
+			$applicant_html = " ".$firstName." welcome to your new page!";
+			
+			// write then close this ish
+			fwrite($applicant_file, $applicant_html);
+			fclose($applicant_file);
+			ftp_quit($ftp_conn);
+
 		}
 		
 	}

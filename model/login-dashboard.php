@@ -35,6 +35,24 @@ class LoginDatabase{
 		$statement->closeCursor();
 		
 	}
+	
+	// see if user already exists
+	public static function already_user($email){
+		$db = Database::getDB();
+		
+		$query = 'SELECT user_email 
+				  FROM users 
+				  WHERE user_email = :email';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':email', $email);
+		$statement->execute();
+		$user = $statement->fetch();
+		$user_exist = $user[0];
+		$statement->closeCursor();
+		
+		return $user_exist;    
+	}
 
 	// log the user in for the designer access
 	public static function dashboard_login($email, $password){
@@ -221,16 +239,16 @@ class LoginDatabase{
 		$statement->closeCursor();
 	}
 	
-	public static function add_bio($bio){
+	public static function add_bio($company_id, $bio){
 		$db = Database::getDB();
 		
-		$query = 'INSERT INTO company
-					(bio)
-					VALUES
-					(:bio)';
+		$query = 'UPDATE company 
+				  SET bio = :bio 
+				  WHERE company_id = :company_id';
 		
 		$statement = $db->prepare($query);
 		$statement->bindValue(':bio', $bio);
+		$statement->bindValue(':company_id', $company_id);
 		$statement->execute();
 		$statement->closeCursor();
 		
@@ -246,6 +264,63 @@ class LoginDatabase{
 		$statement->bindValue(':bio', $bio);
 		$statement->execute();
 		$statement->closeCursor();
+		
+	}
+	
+	// send logo url to database
+	public static function logo_url($logo_url, $company_id){
+		$db = Database::getDB();
+		
+		$query = 'UPDATE company
+				  SET logo_url = :logo_url
+				  WHERE company_id = :company_id';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':logo_url', $logo_url);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$statement->closeCursor();
+		
+		echo $logo_url;
+		echo $company_id;
+	}
+	
+	// get the number of applicants for the dashboard
+	public static function get_number_applicants($company_id){
+		$db = Database::getDB();
+		
+		$query = 'SELECT * FROM applicants 
+                  INNER JOIN jobs 
+                  ON applicants.job_id = jobs.job_id 
+                  WHERE applicants.company_id = :company_id
+                  AND applicants.is_active = 0
+                  AND NOT applicants.stage = 6';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$num_applicants = $statement->rowCount();
+		$statement->closeCursor();
+		
+		return $num_applicants;
+		
+	}
+	
+	// get the number of jobs for the dashboard
+	public static function get_number_jobs($company_id){
+		$db = Database::getDB();
+		
+		$query = 'SELECT * FROM jobs 
+				  WHERE company_id = :company_id
+				  AND is_active = 0';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$num_jobs = $statement->rowCount();
+		$statement->closeCursor();
+		
+		return $num_jobs;
 		
 	}
 	

@@ -29,6 +29,7 @@ require_once(SECURE_CONNECTION);
            
         <!-- JS LIBRARIES -->   
 		<script src="<?php echo D_ROOT; ?>/assets/js/jquery-1.12.4.min.js"></script>
+        <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
              
         <script>
 			
@@ -38,11 +39,12 @@ require_once(SECURE_CONNECTION);
 			});
 			
 			// date picker function
-		  $( function() {
-			$( "#datepicker" ).datepicker();
-		  } );
+//		  $( function() {
+//			$( "#datepicker" ).datepicker();
+//		  } );
 			
 		</script>
+     
       <style>
 	   h2, hr{
 		   color: #337BB6;

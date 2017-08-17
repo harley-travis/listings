@@ -36,7 +36,7 @@
 
 <div class="container-fluid">
 <div class="col-md-6 col-xs-12 company-logo-wrapper">
-	<img src="<?php echo D_ROOT; ?>/profile/white-july/logo.png" alt="" class="company-logo-img">
+	<img src="<?php echo D_ROOT."/profile/".$_SESSION['company_name']."/logo/"; ?>logo.png" alt="" class="company-logo-img">
 	<div class="btn-profile-wrapper">
 		<form class="logo-btn-thing" action="<?php echo D_ROOT; ?>/view/profile/index.php" method="post">
 			<input type="hidden" name="action" value="delete-logo">
@@ -45,13 +45,10 @@
 		<a href="<?php echo D_ROOT; ?>/view/profile/logo.php" class="btn btn-primary">Upload Logo</a>
 	</div>
 </div>
-<div class="col-md-6 col-xs-12">
-	<ul>
-	<li></li>
-
-</ul>
-	
 </div>
+<div class="container-fluid">
+	<h2>Company Bio</h2>
+	<p></p>
 </div>
 <div class="container-fluid">
 <div class="row page-title-embed">
@@ -59,11 +56,15 @@
 		<h2>Embed Job Postings To Site</h2>
 	</div><!-- container -->
 </div><!-- page-title -->
+<form action="" id="refresh-jobs" method="post">
+	<input type="hidden" name="" value="refresh-jobs">
+	<input type="submit" value="Refresh Job Listings" class="btn btn-success">
+</form>
 <p>Copy this code and paste it on your website to display job listings.</p>
 <p>This code is mobile responsive, and shouldn't need additional CSS changes.</p>
-<p>You can view your job postings <a href="https://www.careers.whitejuly.com/profile/white-july/jobs/jobs-view.php" target="_blank">here</a></p>
+<p>You can view your job postings <a href="<?php echo URL."/profile/".$_SESSION['company_name']."/jobs/listings.php"?>" target="_blank">here</a></p>
 
-<xmp><iframe src="https://www.careers.whitejuly.com/profile/white-july/jobs/jobs-view.php" height="100%" width="100%" allowfullscreen="" frameborder="0"></iframe></xmp>
+<xmp><iframe src="<?php echo URL."/profile/".$_SESSION['company_name']."/jobs/listings.php"?>" height="100%" width="100%" allowfullscreen="" frameborder="0"></iframe></xmp>
 
 </div>
 

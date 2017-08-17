@@ -19,3 +19,31 @@
 		padding-left: 0 !important;
 	}
 }
+.wj-info-box {
+    background: #fafafa;
+    box-shadow: 1px 2px 10px -6px #2c2929;
+}
+.data-bubble {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.bubble-number {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 23%;
+    font-size: 4em;
+}
+.green{
+	background-color: $green;
+}
+.blue{
+	background-color: $blue;
+}
+.dashboard-applicants-wrapper{
+	padding-top: 60px;
+}

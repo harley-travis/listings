@@ -20,22 +20,27 @@
 
 			<div class="form-group">
 				<label for="description">Description</label><span class="red-txt">*</span>
-				<textarea class="form-control" rows="3" name="description"><?php echo $job['description']; ?></textarea>
+				<textarea name="edit-description"><?php echo $job['description']; ?></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="qualifications">Qualifications</label><span class="red-txt">*</span>
-				<textarea class="form-control" rows="3" name="qualifications"><?php echo $job['qualifications']; ?></textarea>
+				<textarea name="edit-qualifications"><?php echo $job['qualifications']; ?></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="add_info">Additional Information</label>
-				<textarea class="form-control" rows="3" name="add_info"><?php echo $job['add_info']; ?></textarea>
+				<textarea name="edit-add_info"><?php echo $job['add_info']; ?></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="salary">Salary</label><span class="red-txt">*</span>
 				<input type="text" class="form-control" name="salary" value="<?php echo $job['salary']; ?>">
+			</div>
+			
+			<div class="form-group">
+				<label for="duration">Duration</label><span class="red-txt">*</span>
+				<input type="text" class="form-control" name="duration" value="<?php echo $job['duration']; ?>">
 			</div>
 
 			<div class="form-group">
@@ -54,3 +59,10 @@
 		</div><!-- pg-btns -->
 	</form>
 </div><!-- form-wrapper -->
+
+<script>
+
+	CKEDITOR.replace( 'edit-description' );
+	CKEDITOR.replace( 'edit-qualifications' );
+	CKEDITOR.replace( 'edit-add_info' );
+</script>

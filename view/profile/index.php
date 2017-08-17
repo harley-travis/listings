@@ -16,6 +16,7 @@
 	require_once  __DIR__ . "/../header.php";	
 	require_once  __DIR__ . "/../../model/database.php";
 	require_once  __DIR__ . "/../../model/login-dashboard.php";
+	require_once  __DIR__ . "/../../model/jobs.php";
 
 	// controll the action the user selects
 	switch ($action){
@@ -25,69 +26,72 @@
 			break;
 		case "upload-logo":
 			
+			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+			
 			$file_result = "";
+			$logoDirUrl  = URL_PATH . "/profile/" . $_SESSION['company_name'] . "/logo";
 	
+			// upload logo
+			$file_result = "";
+
 			// if there is an error uploading the file, display a message
 			if($_FILES["logo-file"]["error"] > 0){
-				
+
 				$file_result .= "No file uploaded, or invalid file";
 				$file_result .= "Error code: " .$_FILES["logo-file"]["error"] . "<br>";
-				
+
 			}else{
-				
-				$ftp_server 	= "sundance.dreamhost.com";
-				$ftp_username = 'trahar20';
-				$ftp_userpass = 'Spiderman1!';
-				$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
-				$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);	
-				
+
 				$logo_file = $_FILES["logo-file"]["name"];
 				$tempFile = $_FILES["logo-file"]["tmp_name"];
-				
-				$logoLocation = "/home/trahar20/careers.whitejuly.com/profile/white-july/" . $logo_file;
-				
+
+				$logoLocation = FULL_PATH . "/profile/". $_SESSION['company_name'] . "/logo/". $logo_file;
+
 				// move the file to the specific folders
 				move_uploaded_file($tempFile, $logoLocation);
-				
+
 				// the new file location
-				$urlLocation = "/careers.whitejuly.com/profile/white-july/".$logo_file;
-				$renameLogo = "/careers.whitejuly.com/profile/white-july/logo.png";
-				
+				$urlLocation = URL_PATH . "/profile/".$_SESSION['company_name']."/logo/".$logo_file;
+				$renameLogo = $logoDirUrl."/logo.png";
+
 				// rename the resume file
 				ftp_rename($ftp_conn, $urlLocation, $renameLogo);
 				
-				
-				
-				
-				
-				include('../header.php');
-				echo "<div class='alert alert-success alert-dismissible' role='alert'>
-						<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
-							<span aria-hidden='true'>&times;</span>
-						</button>
-							<strong>Success!</strong> Your logo has uploaded successfully!</div>";
-				include('../left-col.php');
-				include("profile.php");
-				include('../footer.php');
+				// send img url to database
+				LoginDatabase::logo_url($renameLogo, $_SESSION['company_id']);
+
+				ftp_quit($ftp_conn);
 
 			}
+
+			include('../header.php');
+			echo "<div class='alert alert-success alert-dismissible' role='alert'>
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+						<span aria-hidden='true'>&times;</span>
+					</button>
+						<strong>Success!</strong> Your logo has uploaded successfully!</div>";
+			include('../left-col.php');
+			include("profile.php");
+			include('../footer.php');
 			
 			break;
 		case "delete-logo":
-			$ftp_server = "sundance.dreamhost.com";
-			$ftp_username = 'trahar20';
-			$ftp_userpass = 'Spiderman1!';
+
 			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
 			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
-			$delete_file_name  = '/careers.whitejuly.com/profile/white-july/logo.png';
+			$delete_file_name  = URL_PATH.'/profile/'.$_SESSION['company_name'].'/logo/logo.png';
 			
 			if(ftp_delete($ftp_conn, $delete_file_name)){
 				echo "file deleted";
 			}else{
 				echo "there was an error deleting the file";
 			}
+			
+			// send img url to database
+			LoginDatabase::logo_url($renameLogo, $_SESSION['company_id']);
 
-			ftp_close($ftp_conn);
+			ftp_quit($ftp_conn);
 			header("Refresh:0; url=https://www.careers.whitejuly.com/index.php?action=profile"); // refresh page and redirect to this page
 			include('../header.php');
 			include('../left-col.php');
@@ -105,7 +109,7 @@
 			break;
 		case "company-bio":
 			$bio = filter_input(INPUT_POST, 'bio');
-			LoginDatabase::add_bio($bio);
+			LoginDatabase::add_bio($_SESSION['company_id'], $bio);
 			include('../header.php');
 			include('../left-col.php');
 			include('profile.php');
@@ -118,6 +122,18 @@
 			include('../left-col.php');
 			include("embed.php");
 			include('../footer.php');
+			break;
+		case "refresh-jobs":
+			
+			// create the job listings page 
+			Jobs::create_listings($ftp_server, $ftp_username, $ftp_userpass, $_SESSION['company_name'], $_SESSION['company_id']);
+			
+			echo "<div class='alert alert-success alert-dismissible' role='alert'>
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+						<span aria-hidden='true'>&times;</span>
+					</button>
+						<strong>Success!</strong> The job listings embed has been refreshed</div>";
+			
 			break;
 		default: 
 			//$jobs = Jobs_DB::get_all_jobs();

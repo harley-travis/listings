@@ -19,31 +19,31 @@ class LoginDatabase{
 	}
 
 	// log the user in for the designer access
-	public static function designer_login($email, $password){
-		$db = Database::getDB();
-		$password = sha1($email . $password);
-		$timestamp = date("Y-m-d H:i:s A"); // put the date n' time into a var
-
-		$query = 'SELECT user_id FROM users
-				  WHERE user_email = :email AND user_password = :password; 
-				  UPDATE users 
-				  SET last_logged_on = :timestamp 
-				  WHERE user_email = :email AND user_password = :password';
-		$statement = $db->prepare($query);
-		$statement->bindValue(':email', $email);
-		$statement->bindValue(':password', $password);
-		$statement->bindValue(':timestamp', $timestamp);
-		$statement->execute();
-		//$valid = ($statement->rowCount() == 1);
-		$valid = ($statement->$email);
-		$statement->closeCursor();
-		
-		echo $valid.": is the username";
-
-		
-		return $valid;
-
-	}
+//	public static function designer_login($email, $password){
+//		$db = Database::getDB();
+//		$password = sha1($email . $password);
+//		$timestamp = date("Y-m-d H:i:s A"); // put the date n' time into a var
+//
+//		$query = 'SELECT user_id FROM users
+//				  WHERE user_email = :email AND user_password = :password; 
+//				  UPDATE users 
+//				  SET last_logged_on = :timestamp 
+//				  WHERE user_email = :email AND user_password = :password';
+//		$statement = $db->prepare($query);
+//		$statement->bindValue(':email', $email);
+//		$statement->bindValue(':password', $password);
+//		$statement->bindValue(':timestamp', $timestamp);
+//		$statement->execute();
+//		//$valid = ($statement->rowCount() == 1);
+//		$valid = ($statement->$email);
+//		$statement->closeCursor();
+//		
+//		echo $valid.": is the username";
+//
+//		
+//		return $valid;
+//
+//	}
 
 	public static function last_logon($timestamp){
 		$db = Database::getDB();
