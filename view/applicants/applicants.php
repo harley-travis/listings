@@ -84,9 +84,9 @@ form.form-inline {
 			?>
 		</td>
 		<td><?php echo $applicant['job_title']; ?></td>
-		<td><?php echo $applicant['applicant_firstName'] . " " . $applicant['applicant_lastName']; ?></td>
+		<td><a href="<?php echo "/profile/".$_SESSION['company_name']."/applicants/".$applicant['applicant_lastName']."_".$applicant['applicant_firstName']."/applicant_profile.php"; ?>"><?php echo $applicant['applicant_firstName'] . " " . $applicant['applicant_lastName']; ?></a></td>
 		<td><?php echo $applicant['applicant_phone']; ?></td>
-		<td><a href="<?php echo "/profile/white-july/resumes/". $applicant['applicant_lastName']."_".$applicant['applicant_firstName']; ?>/resume.pdf" download>View Resume</a></td>
+		<td><a href="<?php echo "/profile/".$_SESSION['company_name']."/applicants/".$applicant['applicant_lastName']."_".$applicant['applicant_firstName']."/".$applicant['applicant_lastName']."_".$applicant['applicant_firstName']; ?>_resume.pdf" target="_blank">View Resume</a></td>
 		<td></td>
 	</tr>
 	<?php endforeach; ?>

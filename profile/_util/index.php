@@ -12,6 +12,7 @@
 	$phone = filter_input(INPUT_POST, 'applicant_phone');
 	$job_id = filter_input(INPUT_POST, 'job_id');
 	$company_name = filter_input(INPUT_POST, 'company_name');
+	$company_id = filter_input(INPUT_POST, 'company_id');
 
 	// need to grab the company id
 
@@ -25,7 +26,7 @@
 		echo "There was an error with the form. Please try again.";
 	}else{
 		
-		Applicants::add_applicant($firstName, $lastName, $email, $phone, $job_id);
+		Applicants::add_applicant($firstName, $lastName, $email, $phone, $job_id, $company_id);
 		
 		// upload the resume 
 		// --------------------------

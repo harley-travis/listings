@@ -393,15 +393,15 @@
 		}
 		
 		// add applicant
-		function add_applicant($firstName, $lastName, $email, $phone, $job_id){
+		function add_applicant($firstName, $lastName, $email, $phone, $job_id, $company_id){
 			$db = Database::getDB();
 
 			$timestamp = date("Y-m-d H:i:s A");
 
 			$query = 'INSERT INTO applicants
-					  (applicant_firstName, applicant_lastName, applicant_email, applicant_phone, date_applied, job_id)
+					  (applicant_firstName, applicant_lastName, applicant_email, applicant_phone, date_applied, job_id, company_id)
 					  VALUES
-					  (:applicant_firstName, :applicant_lastName, :applicant_email, :applicant_phone, :date, :job_id)';
+					  (:applicant_firstName, :applicant_lastName, :applicant_email, :applicant_phone, :date, :job_id, :company_id)';
 
 			$statement = $db->prepare($query);
 			$statement->bindValue(':applicant_firstName', $firstName);
@@ -410,6 +410,7 @@
 			$statement->bindValue(':applicant_phone', $phone);
 			$statement->bindValue(':date', $timestamp);
 			$statement->bindValue(':job_id', $job_id);
+			$statement->bindValue(':company_id', $company_id);
 			$statement->execute();
 			$statement->closeCursor();
 
@@ -428,18 +429,34 @@
 			// create page 
 			$applicant_profile = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/applicants/".$lastName."_".$firstName."/applicant_profile.php";
 			
+			$listingsFile = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/applicants/".$lastName."_".$firstName."/header.php";
+			
+			// create header
+			$listings_header_file = fopen($listingsFile, "w");
+			$header = '<?php
+
+						$firstName = '.$firstName.';
+
+						
+					?>';
+			
+			fwrite($listings_header_file, $header);
+			fclose($listings_header_file);
+			
 			// open the file
 			$applicant_file = fopen($applicant_profile, "w") or die("Unable to open file!");
 			
 			// this code
-			$applicant_html = " ".$firstName." welcome to your new page!";
+			$applicant_html = file_get_contents( __DIR__ . '/../profile/_util/applicant-profile.php' );
 			
-			// write then close this ish
+			//write then close this ish
 			fwrite($applicant_file, $applicant_html);
 			fclose($applicant_file);
 			ftp_quit($ftp_conn);
 
 		}
+		
+
 		
 	}
 
