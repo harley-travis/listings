@@ -1,5 +1,6 @@
 <?php 
 	require_once __DIR__ . '/../listings_header.php';
+	require_once __DIR__ . '/../../../_util/job-posting-header.php';
 ?>
 <html>
 	<head>

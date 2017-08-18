@@ -3,6 +3,7 @@
 	// grab the db files
 	require_once  __DIR__ . "/../../config.php";
 	require_once  __DIR__ . "/../../model/database.php";
+	require_once  __DIR__ . "/../../model/jobs.php";
 	require_once  __DIR__ . "/../../model/applicant_db.php";
 
 	// snatch the variables from the form
@@ -68,7 +69,7 @@
 				ftp_rename($ftp_conn, $urlLocation, $renameResume);
 				
 				// function to create applicant profile page
-				Applicants::create_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, $company_name, $firstName, $lastName, $email, $phone, $job_id);
+				Applicants::create_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, $company_name, $firstName, $lastName, $email, $phone, $job_id, $company_id);
 				
 					
 			}else{

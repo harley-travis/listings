@@ -370,11 +370,10 @@ class Jobs{
 						define("LOGO_URL", "https://careers.whitejuly.com/profile/'.$company_name.'/logo/logo.png");
 
 						$list_company_id = '.$company_id.';
-						$job_title = '.$job['job-title'].';
-						
+
 						$jobs = Jobs::get_all_jobs($list_company_id);
 						$company = Jobs::get_company_by_name($list_company_id);
-						
+					
 					?>';
 		
 		fwrite($listings_header_file, $header);

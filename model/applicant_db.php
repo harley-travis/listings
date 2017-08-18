@@ -416,28 +416,92 @@
 
 		}
 		
+		// get interview stage by employee
+		public static function get_applicant_interview_stage($email){
+			$db = Database::getDB();
+			
+			$query = 'SELECT applicant_id 
+					  FROM applicants 
+					  WHERE applicant_email = :email';
+			
+			$statement = $db->prepare($query);
+			$statement->bindValue(':email', $email);
+			$statement->execute();
+			$stage = $statement->fetch();
+			$statement->closeCursor();
+			
+			return $stage;
+		}
+		
 		// create the user profile page
-		public static function create_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, $company_name, $firstName, $lastName, $email, $phone, $job_id){
+		public static function create_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, $company_name, $firstName, $lastName, $email, $phone, $job_id, $company_id){
 		
 			// login FTP
 			$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
 			$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
 			
 			// get the time 
-			$timestamp = date("Y-m-d H:i:s A"); // time applied
+			$date_applied = date("Y-m-d H:i:s A"); // time applied
+			
+			// function to pass job_id to grab job information
+			$job_name = Jobs::get_job_by_id($job_id, $company_id);
+			
+			// get applicant interview stage
+			$stage = Applicants::get_applicant_interview_stage($email);
 			
 			// create page 
 			$applicant_profile = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/applicants/".$lastName."_".$firstName."/applicant_profile.php";
 			
 			$listingsFile = "/home/trahar20/careers.whitejuly.com/profile/".$company_name."/applicants/".$lastName."_".$firstName."/header.php";
 			
+			$applicant_resume = "/profile/".$company_name."/applicants/".$lastName."_".$firstName."/".$lastName."_".$firstName."_resume.pdf";
+			
 			// create header
 			$listings_header_file = fopen($listingsFile, "w");
 			$header = '<?php
 
-						$firstName = '.$firstName.';
-
+						$firstName = "'.$firstName.'";
+						$lastName = "'.$lastName.'";
+						$email = "'.$email.'";
+						$phone = "'.$phone.'";
+						$job_name = "'.$job_name['job_title'].'";
+						$resume = "'.$applicant_resume.'";
+						$date_applied = "'.$date_applied.'";
+						$stage = "'.$stage.'";
 						
+						// phone number display
+						
+						
+						// sort out the stage
+						$stage_num = "";
+						
+						if($stage == 0){
+							$stage_num = "Schedule Phone Interview";
+						}else if($stage == 1){
+							$stage_num = "Phone Interview Complete";
+						}else if($stage == 2){
+							$stage_num = "1st Interview Complete";
+						}else if($stage == 3){
+							$stage_num = "2nd Interview Complete";
+						}else if($stage == 4){
+							$stage_num = "3rd Interview Complete";
+						}else if($stage == 6){
+							$stage_num = "Hired";
+						}else{
+							$stage_num = "<b>ERROR:</b> There was an error displaying the interview stage. Please contact White July if this persists.";
+						}
+						
+						
+						
+						
+						
+						// interview dates
+						
+
+
+
+	
+	
 					?>';
 			
 			fwrite($listings_header_file, $header);
@@ -446,7 +510,7 @@
 			// open the file
 			$applicant_file = fopen($applicant_profile, "w") or die("Unable to open file!");
 			
-			// this code
+			// get the applicant profile php template
 			$applicant_html = file_get_contents( __DIR__ . '/../profile/_util/applicant-profile.php' );
 			
 			//write then close this ish
