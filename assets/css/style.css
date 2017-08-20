@@ -9,19 +9,19 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: "coolvetica"; }
 
-.red-txt {
+.red-txt, .red {
   color: red; }
 
 /* OVERRIDES */
-/* Scss Document */
+.alert {
+  margin-bottom: 0 !important; }
+
 /* HEADER */
 .logo-font {
   font-family: "coolvetica"; }
 
 .logo-header {
   background: #343a40 !important;
-  padding: 10px;
-  margin-bottom: 30px;
   position: fixed;
   top: 0;
   right: 0;
@@ -50,7 +50,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #337ab7; }
 
 .page-title {
-  border-bottom: 1px solid #eee;
   margin-bottom: 20px;
   padding: 0; }
 
@@ -77,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #f8f9fa !important;
   border-right: #eee solid 1px;
   position: fixed;
-  top: 99px;
+  top: 80px;
   bottom: 0;
   left: 0;
   z-index: 1000;
@@ -89,7 +88,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: -29px; }
 
 .right-col {
-  padding-top: 35px;
   float: right;
   margin-top: 10em; }
 
@@ -155,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
   background: -webkit-linear-gradient(left, #337ab7 0%, #5cb85c 100%);
   background: linear-gradient(to right, #337ab7 0%, #5cb85c 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#337ab7', endColorstr='#5cb85c',GradientType=1 );
-  height: 100vh; }
+  padding: 40px 0 40px 0; }
 
 h1.sign-in-header {
   text-align: center;

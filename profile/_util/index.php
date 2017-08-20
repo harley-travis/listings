@@ -17,11 +17,6 @@
 
 	// need to grab the company id
 
-
-
-
-
-
 	// validate this ish
 	if($firstName == NULL || $lastName == NULL || $email == NULL || $phone == NULL){
 		echo "There was an error with the form. Please try again.";

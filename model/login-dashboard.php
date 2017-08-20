@@ -2,6 +2,30 @@
 
 
 class LoginDatabase{
+	
+	// reCAPTCHA code 
+    function post_captcha($user_response) {
+        $fields_string = '';
+        $fields = array(
+            'secret' => '6LfOci0UAAAAACXC-2U9WgbjW9RHEjR9IxVziXoW',
+            'response' => $user_response
+        );
+        foreach($fields as $key=>$value)
+        $fields_string .= $key . '=' . $value . '&';
+        $fields_string = rtrim($fields_string, '&');
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
+        curl_setopt($ch, CURLOPT_POST, count($fields));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($result, true);
+		
+    }
 
 	// register user at the login screen
 	public static function register($email, $password, $userFirstName, $userLastName, $company){
@@ -280,9 +304,7 @@ class LoginDatabase{
 		$statement->bindValue(':company_id', $company_id);
 		$statement->execute();
 		$statement->closeCursor();
-		
-		echo $logo_url;
-		echo $company_id;
+
 	}
 	
 	// get the number of applicants for the dashboard

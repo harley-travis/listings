@@ -17,6 +17,7 @@
 	require_once  __DIR__ . "/../../model/database.php";
 	require_once  __DIR__ . "/../../model/login-dashboard.php";
 	require_once  __DIR__ . "/../../model/jobs.php";
+	require_once  __DIR__ . "/../../model/billing.php";
 
 	// controll the action the user selects
 	switch ($action){
@@ -121,6 +122,35 @@
 			include('../header.php');
 			include('../left-col.php');
 			include("embed.php");
+			include('../footer.php');
+			break;
+		case "billing":
+			include('../header.php');
+			include('../left-col.php');
+			include("billing.php");
+			include('../footer.php');
+			break;
+		case "pkg-one-monthly":
+			$token = $_POST['stripeToken'];
+			Billing::pkg_one_monthly($token, $_SESSION['user_email']);
+			break;
+		case "pkg-one-yearly":
+			$token = $_POST['stripeToken'];
+			Billing::pkg_one_yearly($token, $_SESSION['user_email']);
+			break;
+		case "pkg-two-monthly":
+			$token = $_POST['stripeToken'];
+			Billing::pkg_two_monthly($token, $_SESSION['user_email']);
+			break;
+		case "pkg-two-yearly":
+			$token = $_POST['stripeToken'];
+			Billing::pkg_two_yearly($token, $_SESSION['user_email']);
+			break;	
+		case "success-billing":
+			include('../header.php');
+			include('../left-col.php');
+			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Success!</strong> Your payment was successful!</div>";
+			include("billing.php");
 			include('../footer.php');
 			break;
 		case "refresh-jobs":

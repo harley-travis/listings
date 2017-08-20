@@ -7,6 +7,8 @@
 		
 		$jobFile = fopen("j/".$job['job_title'].".php", "w") or die("Unable to open file!");
 		
+		$job_id = $job['job_id'];
+		
 		// format the currency
 		setlocale(LC_MONETARY, 'en_US.UTF-8');
 		$money = $job['salary'];
@@ -47,6 +49,9 @@
 		$txt = "
 			<?php 
 				require_once __DIR__ . '/../listings_header.php';
+				require_once __DIR__ . '/../../../../model/reports.php';
+				
+				Reports::update_number_visits(".$job_id.");
 			?>
 			<html>
 				<head>

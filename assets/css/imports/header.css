@@ -7,8 +7,8 @@ Error: Undefined variable: "$whiteJulyFont".
 3: }
 4: .logo-header {
 5:     background: #343a40 !important;
-6:     padding: 10px;
-7:     margin-bottom: 30px;
+6:     position: fixed;
+7:     top: 0;
 
 Backtrace:
 C:\Users\travis\Documents\white-july\assets\css\imports\header.scss:2
@@ -57,4 +57,4 @@ C:/Program Files/Adobe/Adobe Dreamweaver CC 2017/ruby/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$whiteJulyFont\".\A         on line 2 of C:\Users\travis\Documents\white-july\assets\css\imports\header.scss\A \A 1: .logo-font{\A 2: 	font-family: $whiteJulyFont;\A 3: }\A 4: .logo-header {\A 5:     background: #343a40 !important;\A 6:     padding: 10px;\A 7:     margin-bottom: 30px;"; }
+  content: "Error: Undefined variable: \"$whiteJulyFont\".\A         on line 2 of C:\Users\travis\Documents\white-july\assets\css\imports\header.scss\A \A 1: .logo-font{\A 2: 	font-family: $whiteJulyFont;\A 3: }\A 4: .logo-header {\A 5:     background: #343a40 !important;\A 6:     position: fixed;\A 7:     top: 0;"; }

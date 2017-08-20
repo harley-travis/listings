@@ -38,17 +38,7 @@
 			</div>
 		</div>
 		<div class="col-md-6 col-xs-12 wj-info-box">
-			<div class="wj-ib-wrapper">
-				<h3>News From White July</h3>
-				<p>Good afternoon stranger, we have a lot of thinks cooking in the lab right now. We just wanted to keep you updated on some recent additions and changes that we have for you.</p>
-				<ul>
-					<li>Included new UI</li>
-					<li>Updated flow of new applicants</li>
-					<li>Fixed minor bugs</li>
-					<li>Created applicants profile page</li>
-					<li>Responsive job listings page</li>
-				</ul>
-			</div>
+			<?php include('dashboard-news.php'); ?>
 		</div>
 	</div>
 </div>

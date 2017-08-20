@@ -21,6 +21,7 @@ require_once(SECURE_CONNECTION);
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+        <meta http-equiv="Cache-control" content="no-cache">
         
         <!-- CSS LIBRARIES -->
         <link rel="stylesheet" type="text/css" href="<?php echo D_ROOT; ?>/assets/css/normalize.css">
@@ -50,5 +51,7 @@ require_once(SECURE_CONNECTION);
 		   color: #337BB6;
 	   }
 		</style>
+   
+   		<script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body> 

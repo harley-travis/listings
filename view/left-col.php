@@ -23,11 +23,13 @@
 						
 						<li><a href="<?php echo D_ROOT; ?>/index.php?action=users"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Users</a></li>
 						
-						<li><a href="<?php echo D_ROOT; ?>/view/profile/bio.php"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Company Bio</a></li>
+						<li><a href="<?php echo D_ROOT; ?>/view/profile/bio.php"><span class="glyphicon glyphicon-align-left dashboard-icon" aria-hidden="true"></span> Company Bio</a></li>
 
-						<li><a href="<?php echo D_ROOT; ?>/view/profile/bio.php"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Billing</a></li>
+						<li><a href="<?php echo D_ROOT; ?>/view/profile/index.php?action=billing"><span class="glyphicon glyphicon-shopping-cart dashboard-icon" aria-hidden="true"></span> Billing</a></li>
+<!--
 						
 						<li><a href="<?php echo D_ROOT; ?>/view/profile/bio.php"><span class="glyphicon glyphicon-globe dashboard-icon" aria-hidden="true"></span> Feedback</a></li>
+-->
 						
 						
 						<li role="separator" class="divider"></li>

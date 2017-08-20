@@ -2,7 +2,7 @@
 Error: Undefined variable: "$blue".
         on line 12 of C:\Users\travis\Documents\white-july\assets\css\imports\login.scss
 
-7: 	height: 100vh;
+7: 	padding: 40px 0 40px 0;
 8: }
 9: h1.sign-in-header {
 10:     text-align: center;
@@ -61,4 +61,4 @@ C:/Program Files/Adobe/Adobe Dreamweaver CC 2017/ruby/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$blue\".\A         on line 12 of C:\Users\travis\Documents\white-july\assets\css\imports\login.scss\A \A 7: 	height: 100vh;\A 8: }\A 9: h1.sign-in-header {\A 10:     text-align: center;\A 11:     padding-bottom: 25px;\A 12: 	color: $blue;\A 13: }\A 14: .login_block_wrapper{\A 15: 	position: relative;\A 16: }\A 17: .login_wrapper {"; }
+  content: "Error: Undefined variable: \"$blue\".\A         on line 12 of C:\Users\travis\Documents\white-july\assets\css\imports\login.scss\A \A 7: 	padding: 40px 0 40px 0;\A 8: }\A 9: h1.sign-in-header {\A 10:     text-align: center;\A 11:     padding-bottom: 25px;\A 12: 	color: $blue;\A 13: }\A 14: .login_block_wrapper{\A 15: 	position: relative;\A 16: }\A 17: .login_wrapper {"; }

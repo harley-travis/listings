@@ -5,7 +5,7 @@ Error: Undefined variable: "$whiteJulyFont".
 1: h1,h2,h3,h4,h5,h6{
 2: 	font-family: $whiteJulyFont;
 3: }
-4: .red-txt{
+4: .red-txt, .red{
 5: 	color: red;
 6: }
 
@@ -56,4 +56,4 @@ C:/Program Files/Adobe/Adobe Dreamweaver CC 2017/ruby/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$whiteJulyFont\".\A         on line 2 of C:\Users\travis\Documents\white-july\assets\css\imports\generals.scss\A \A 1: h1,h2,h3,h4,h5,h6{\A 2: 	font-family: $whiteJulyFont;\A 3: }\A 4: .red-txt{\A 5: 	color: red;\A 6: }"; }
+  content: "Error: Undefined variable: \"$whiteJulyFont\".\A         on line 2 of C:\Users\travis\Documents\white-july\assets\css\imports\generals.scss\A \A 1: h1,h2,h3,h4,h5,h6{\A 2: 	font-family: $whiteJulyFont;\A 3: }\A 4: .red-txt, .red{\A 5: 	color: red;\A 6: }"; }

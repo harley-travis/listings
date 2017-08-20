@@ -8,6 +8,9 @@ include __DIR__ . "/../header.php";
 	.error{
 		color: red;
 	}
+	.g-recaptcha{
+		padding: 10px 0 10px 0;
+	}
 </style>
 <div class="login-content">
 	<div class="reg-form-wrapper">
@@ -69,11 +72,12 @@ include __DIR__ . "/../header.php";
 					<input type="checkbox" value="agree" name="agree"> I agree to the <a href="terms-of-use.php" target="_blank">terms of use.</a>
 				</label>
 			</div>
-
+			
+			<div class="g-recaptcha" data-sitekey="6LfOci0UAAAAAFnSJeWc58JBiMmPnQOfj7trgVv0"></div>
+			
 			<input type="submit" value="Create Account" class="btn btn-success">
-
 		</form>
-	
+		
 		<div class="copyright">
 			<?php echo date('Y'); ?> &copy; <span class="logo-font">White July</span> | All Rights Reserved
 		</div><!-- copyright -->
