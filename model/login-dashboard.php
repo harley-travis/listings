@@ -28,12 +28,12 @@ class LoginDatabase{
     }
 
 	// register user at the login screen
-	public static function register($email, $password, $userFirstName, $userLastName, $company){
+	public static function register($email, $password, $userFirstName, $userLastName, $company, $stripe_customer_id, $stripe_pkg){
 		$db = Database::getDB();
 		$password = sha1($email . $password); // encrypt the password and email
 		
-		$query = 'INSERT INTO users (user_email, user_password, user_firstName, user_lastName, user_type)
-				  VALUES (:email, :password, :user_firstName, :user_lastName, 1);
+		$query = 'INSERT INTO users (user_email, user_password, user_firstName, user_lastName, user_type, stripe_id, stripe_pkg)
+				  VALUES (:email, :password, :user_firstName, :user_lastName, 1, :stripe, :stripe_pkg);
 				  
 				  INSERT INTO company (company_name)
 				  VALUES (:company_name);
@@ -55,6 +55,8 @@ class LoginDatabase{
 		$statement->bindValue(':user_firstName', $userFirstName);
 		$statement->bindValue(':user_lastName', $userLastName);
 		$statement->bindValue(':company_name', $company);
+		$statement->bindValue(':stripe', $stripe_customer_id);
+		$statement->bindValue(':stripe_pkg', $stripe_pkg);
 		$statement->execute();
 		$statement->closeCursor();
 		

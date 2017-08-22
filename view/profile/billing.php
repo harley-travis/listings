@@ -24,7 +24,7 @@
 			<td></td>
 		</tr>
 		<tr>
-			<td><a href="#">Swith Plan</a></td>
+			<td><a href="<?php echo D_ROOT; ?>/view/profile/index.php?action=switch-plan">Swith Plan</a></td>
 			<td><a href="#">Cancel Plan</a></td>
 		</tr>
 	</table>

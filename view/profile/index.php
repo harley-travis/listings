@@ -130,6 +130,12 @@
 			include("billing.php");
 			include('../footer.php');
 			break;
+		case "switch-plan":
+			include('../header.php');
+			include('../left-col.php');
+			include("switch-plan.php");
+			include('../footer.php');
+			break;
 		case "pkg-one-monthly":
 			$token = $_POST['stripeToken'];
 			Billing::pkg_one_monthly($token, $_SESSION['user_email']);

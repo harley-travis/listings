@@ -6,6 +6,7 @@
 	require_once('model/login-dashboard.php');
 	require_once  __DIR__ . "/model/applicant_db.php";
 	require_once  __DIR__ . "/model/jobs.php";
+	require_once  __DIR__ . "/model/billing.php";
 
 	// establish an action for the user
 	$action = filter_input(INPUT_POST, 'action');
@@ -94,6 +95,11 @@
 				$userLastName 	= 	filter_input(INPUT_POST, 'lastName');
 				$_SESSION['company_name'] 	= 	filter_input(INPUT_POST, 'companyName');
 				$agree = $_POST['agree'];	
+				$pkg_selection = $_POST['stripe_pkg'];
+
+				
+				// stripe token
+				$token = $_POST['stripeToken'];
 
 				// verify the form data	
 				$email_entry = '';
@@ -151,8 +157,61 @@
 													include('view/login/registration.php');
 												}else if(isset($agree)){
 
-													// send info to function, insert into database
-													LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name']);
+													// create customer in Stripe							
+													$stripe_customer_id = Billing::create_stripe_customer($email, $token);
+													
+					
+			/**
+			  * PKG DB LIST
+			  * 
+			  * 1) one month = 0
+			  * 1) one year = 1
+			  * 1) two month = 2
+			  * 1) two year = 3
+			  * 
+			**/
+													
+			// create customer subscription	then create the user account
+												
+			if($pkg_selection == 'pkg_one_monthly'){
+				
+				$stripe_pkg = Billing::pkg_one_month($stripe_customer_id, $email, $token);
+				
+				LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name'], $stripe_customer_id, $stripe_pkg);
+				
+				
+			}else if($pkg_selection == 'pkg_one_yearly'){
+				
+				$stripe_pkg = Billing::pkg_one_year($stripe_customer_id, $email, $token);
+				
+				LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name'], $stripe_customer_id, $stripe_pkg);
+				
+			}else if($pkg_selection == 'pkg_two_monthly'){
+				
+				$stripe_pkg = Billing::pkg_one_month($stripe_customer_id, $email, $token);
+				
+				LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name'], $stripe_customer_id, $stripe_pkg);
+				
+			}else if($pkg_selection == 'pkg_two_yearly'){
+				
+				$stripe_pkg = Billing::pkg_one_month($stripe_customer_id, $email, $token);
+				
+				LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name'], $stripe_customer_id, $stripe_pkg);
+				
+			}else{
+				echo "There was an error creating your subscription. Please try agian.";
+			}
+													
+													
+													
+			
+			
+													
+			
+													
+			
+													
+			
 
 													// login FTP
 													$ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
