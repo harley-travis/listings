@@ -54,6 +54,44 @@ class Billing{
 		
 	}
 	
+	public static function pkg_two_month($stripe_customer_id, $email, $token){
+		
+		$stripe_pkg_one_month = \Stripe\Subscription::create(array(
+			"customer" => $stripe_customer_id,
+			"source" => $token,
+			"trial_period_days" => 14,
+		  	"items" => array(
+				array(
+		  			"plan" => "3", 
+				),
+			)
+		));
+		
+		$pkg_db_id = 2;
+		
+		return $pkg_db_id;
+		
+	}
+	
+	public static function pkg_two_year($stripe_customer_id, $email, $token){
+		
+		$stripe_pkg_one_month = \Stripe\Subscription::create(array(
+			"customer" => $stripe_customer_id,
+			"source" => $token,
+			"trial_period_days" => 14,
+		  	"items" => array(
+				array(
+		  			"plan" => "4", 
+				),
+			)
+		));
+		
+		$pkg_db_id = 3;
+		
+		return $pkg_db_id;
+		
+	}
+	
 	// charge for 0-50 monthly || currently this function is working on profile > billing & index
 	public static function pkg_one_monthly($token, $email){
 		$customer = \Stripe\Customer::create(array(
