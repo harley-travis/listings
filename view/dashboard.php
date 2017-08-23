@@ -5,6 +5,7 @@
 	require_once  __DIR__ . "/../model/login-dashboard.php";
 	$num_applicants = LoginDatabase::get_number_applicants($_SESSION['company_id']);
 	$num_jobs = LoginDatabase::get_number_jobs($_SESSION['company_id']);
+	$num_hires = LoginDatabase::get_number_hires($_SESSION['company_id']);
 
 
 ?>
@@ -17,7 +18,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3 col-xs-12 data-bubble-wrapper">
+		<div class="col-md-4 col-xs-12 data-bubble-wrapper">
 			<div class="data-bubble green">
 				<span class="bubble-number">
 					<?php echo $num_applicants; ?>
@@ -27,7 +28,7 @@
 				<h4>Current Applicants</h4>
 			</div>
 		</div>
-		<div class="col-md-3 col-xs-12 data-bubble-wrapper">
+		<div class="col-md-4 col-xs-12 data-bubble-wrapper">
 			<div class="data-bubble blue">
 				<span class="bubble-number">
 					<?php echo $num_jobs; ?>
@@ -37,9 +38,16 @@
 				<h4>Active Job Postings</h4>
 			</div>
 		</div>
-		<div class="col-md-6 col-xs-12 wj-info-box">
-			<?php include('dashboard-news.php'); ?>
-		</div>
+		<div class="col-md-4 col-xs-12 data-bubble-wrapper">
+			<div class="data-bubble green">
+				<span class="bubble-number">
+					<?php echo $num_hires; ?>
+				</span>
+			</div>
+			<div class="data-bubble-tite">
+				<h4>Total Hired Employees</h4>
+			</div>
+		</div>		
 	</div>
 </div>
 

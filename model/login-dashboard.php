@@ -348,6 +348,24 @@ class LoginDatabase{
 		
 	}
 	
+	// get the number of hired employees for the dashboard
+	public static function get_number_hires($company_id){
+		$db = Database::getDB();
+		
+		$query = 'SELECT * FROM applicants 
+				  WHERE company_id = :company_id 
+				  AND stage = 6';
+		
+		$statement = $db->prepare($query);
+		$statement->bindValue(':company_id', $company_id);
+		$statement->execute();
+		$num_hires = $statement->rowCount();
+		$statement->closeCursor();
+		
+		return $num_hires;
+		
+	}
+	
 }
 
 

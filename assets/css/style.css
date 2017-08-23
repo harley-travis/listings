@@ -122,20 +122,24 @@ h1, h2, h3, h4, h5, h6 {
   background: #fafafa;
   box-shadow: 1px 2px 10px -6px #2c2929; }
 
+.data-bubble-wrapper {
+  text-align: center; }
+
 .data-bubble {
   border-radius: 50%;
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 200px;
   position: relative;
-  text-align: center;
-  color: white; }
+  color: white;
+  margin: 0 auto; }
 
 .bubble-number {
   position: absolute;
   left: 0;
   right: 0;
-  top: 23%;
-  font-size: 4em; }
+  top: 26%;
+  font-size: 5em;
+  text-align: center; }
 
 .green {
   background-color: #5cb85c; }

@@ -58,7 +58,7 @@
 				$_SESSION['user_email'] = $email;
 				
 				// display applicants
-				$applicants = Applicants::get_applicants_by_user_id($_SESSION['company_id']);
+				$applicants = Applicants::get_recent_applicants($_SESSION['company_id']);
 				
 				// display jobs
 				$jobs = Jobs::get_recent_jobs_by_company($_SESSION['company_id']);
