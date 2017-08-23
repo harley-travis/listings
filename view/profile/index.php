@@ -18,6 +18,7 @@
 	require_once  __DIR__ . "/../../model/login-dashboard.php";
 	require_once  __DIR__ . "/../../model/jobs.php";
 	require_once  __DIR__ . "/../../model/billing.php";
+	require_once  __DIR__ . "/../../model/email.php";
 
 	// controll the action the user selects
 	switch ($action){
@@ -118,6 +119,32 @@
 			break;
 		case "edit-bio":
 			break;
+			
+		case "view-emails":
+			
+			$rejection = Email::get_rejection_template($_SESSION['company_id']);
+			$interview = Email::get_interview_template($_SESSION['company_id']);
+			$offer	   = Email::get_offer_template($_SESSION['company_id']);
+		
+			include('email-template.php');
+			
+			break;	
+		case "edit-rejection":
+			
+			Email::edit_rejection_template($_SESSION['company_id']);
+			
+			
+			break;
+			
+		case "edit-interview":
+			
+			break;
+			
+		case "edit-offer":
+			
+			break;
+			
+			
 		case "embed":
 			include('../header.php');
 			include('../left-col.php');

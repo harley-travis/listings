@@ -30,6 +30,12 @@ class Billing{
 			)
 		));
 		
+		// amount for the subscription 
+		$amount = 15000;
+		
+		// charge the user for one month
+		//Billing::charge_pkg_one_month($stripe_customer_id, $token, $amount);
+		
 		$pkg_db_id = 0;
 		
 		return $pkg_db_id;
@@ -91,6 +97,41 @@ class Billing{
 		return $pkg_db_id;
 		
 	}
+	
+	
+	// create a card for the new user
+	public static function create_card($customer_id, $token){
+		
+		
+		
+	}
+	
+	
+	/**
+	** EVERYTHING BELOW THIS COMMENT IS USED FOR THE BILLING PAGE. 
+	** EVERYTHING ABOVE THIS COMMENT IS USED FOR THE REGISTRATION PAGE
+	*/
+	
+	
+	// charge pkg_one_month
+	public static function charge_pkg_one_month($customer_id, $token, $amount){
+		
+		\Stripe\Charge::create(array(
+			"customer"		=> $customer_id,
+			"amount"		=> $amount,
+			"currency"		=> 'usd',
+			"source" 		=> $token,
+			"description"	=> "Monthly charge"
+		));
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	// charge for 0-50 monthly || currently this function is working on profile > billing & index
 	public static function pkg_one_monthly($token, $email){

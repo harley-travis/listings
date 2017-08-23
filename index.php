@@ -188,13 +188,13 @@
 				
 			}else if($pkg_selection == 'pkg_two_monthly'){
 				
-				$stripe_pkg = Billing::pkg_one_month($stripe_customer_id, $email, $token);
+				$stripe_pkg = Billing::pkg_two_month($stripe_customer_id, $email, $token);
 				
 				LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name'], $stripe_customer_id, $stripe_pkg);
 				
 			}else if($pkg_selection == 'pkg_two_yearly'){
 				
-				$stripe_pkg = Billing::pkg_one_month($stripe_customer_id, $email, $token);
+				$stripe_pkg = Billing::pkg_two_year($stripe_customer_id, $email, $token);
 				
 				LoginDatabase::register($email, $password, $userFirstName, $userLastName, $_SESSION['company_name'], $stripe_customer_id, $stripe_pkg);
 				
