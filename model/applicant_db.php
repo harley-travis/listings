@@ -450,6 +450,25 @@
 			return $stage;
 		}
 		
+		// get the applicant by applicant id
+		public static function get_applicant_by_applicant_id($applicant_id){
+			$db = Database::getDB();
+			
+			$query = 'SELECT * from applicants 
+					  INNER JOIN jobs 
+					  ON applicants.job_id = jobs.job_id 
+					  WHERE applicants.applicant_id = :applicant_id';
+			
+			$statement = $db->prepare($query);
+			$statement->bindValue(':applicant_id', $applicant_id);
+			$statement->execute();
+			$applicant = $statement->fetch();
+			//$applicant_data = $applicant[0];
+			$statement->closeCursor();
+			
+			return $applicant;
+		}
+		
 		// create the user profile page
 		public static function create_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, $company_name, $firstName, $lastName, $email, $phone, $job_id, $company_id){
 		
@@ -525,14 +544,14 @@
 			fclose($listings_header_file);
 			
 			// open the file
-			$applicant_file = fopen($applicant_profile, "a") or die("Unable to open file!");
+			//$applicant_file = fopen($applicant_profile, "a") or die("Unable to open file!");
 			
 			// get the applicant profile php template
-			$applicant_html = file_get_contents( __DIR__ . '/../profile/_util/applicant-profile.php' );
+			//$applicant_html = file_get_contents( __DIR__ . '/../profile/_util/applicant-profile.php' );
 			
 			//write then close this ish
-			fwrite($applicant_file, $applicant_html);
-			fclose($applicant_file);
+			//fwrite($applicant_file, $applicant_html);
+			//fclose($applicant_file);
 			ftp_quit($ftp_conn);
 
 		}
@@ -622,15 +641,18 @@
 			fclose($listings_header_file);
 			
 			// open the file
-			$applicant_file = fopen($applicant_profile, "w") or die("Unable to open file!");
+			//$applicant_file = fopen($applicant_profile, "w") or die("Unable to open file!");
 			
 			// get the applicant profile php template
-			$applicant_html = file_get_contents( __DIR__ . '/../profile/_util/applicant-profile.php' );
+			//$applicant_html = file_get_contents( __DIR__ . '/../profile/_util/applicant-profile.php' );
 			
 			//write then close this ish
-			fwrite($applicant_file, $applicant_html);
-			fclose($applicant_file);
+			//fwrite($applicant_file, $applicant_html);
+			//fclose($applicant_file);
 			ftp_quit($ftp_conn);
+			
+			// redirect user to user_profile.php
+			header();
 
 		}
 		

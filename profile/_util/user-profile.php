@@ -1,23 +1,39 @@
 <?php 
 // the header is created in the applicant_db file
 // it holds all the variables used on this template
-require_once __DIR__ . "/../../../../view/header.php";
-require('header.php'); 
-require_once __DIR__ . "/../../../../view/left-col.php";
-require_once __DIR__ . "/../../../../model/applicant_db.php";
+require_once __DIR__ . "/../../view/header.php";
+//require('../header.php'); 
+require_once __DIR__ . "/../../view/left-col.php";
+require_once __DIR__ . "/../../model/applicant_db.php";
 
-// send the data to update the profile page
-Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, $applicant_id, $company_name, $job_id, $firstName, $lastName, $job_name, $date_applied, $phone, $email);
+// get the query out of hte url string
+$applicant_id = filter_input(INPUT_POST, 'applicant_id');
+
+// get applicant information
+$applicant = Applicants::get_applicant_by_applicant_id($applicant_id);
+
+// sort out the stage
+$stage_num = "";
+
+if($applicant['stage'] == 0){
+	$stage_num = "Schedule Phone Interview";
+}else if($applicant['stage'] == 1){
+	$stage_num = "Phone Interview Complete";
+}else if($applicant['stage'] == 2){
+	$stage_num = "1st Interview Complete";
+}else if($applicant['stage'] == 3){
+	$stage_num = "2nd Interview Complete";
+}else if($applicant['stage'] == 4){
+	$stage_num = "3rd Interview Complete";
+}else if($applicant['stage'] == 6){
+	$stage_num = "Hired";
+}else{
+	$stage_num = "<b>ERROR:</b> There was an error displaying the interview stage. Please contact White July if this persists.";
+}
+						
 
 ?>
 
-<script>
-	$(document).ready(function(){
-		window.setTimeout(function(){
-			<?php header("Refresh:0; url=https://www.careers.whitejuly.com/index.php?action=profile"); ?>
-		}, 20000);
-	});
-</script>
 
 <style>
 	.applicant-header{
@@ -54,11 +70,10 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 
 <div class="applicant-header">
 	<div class="col-md-6 col-xs-12 applicant-header-left">
-		<h2><?php echo $firstName." ".$lastName; ?></h2>
+		<h2><?php echo $applicant['applicant_firstName'] ." ". $applicant['applicant_lastName']; ?></h2>
 	</div>
 	<div class="col-md-6 col-xs-12 applicant-header-right">
 		<a href="<?php echo $resume; ?>" class="btn btn-success" target="_blank">View Resume</a> 
-		<a href="<?php echo $resume; ?>" class="btn btn-primary" download>Download Resume</a>
 	</div>
 </div>
 
@@ -68,19 +83,19 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 		<table>
 			<tr>
 				<td><b>Position:</td>
-				<td class="left-tab-pad"><?php echo $job_name; ?></td>
+				<td class="left-tab-pad"><?php echo $applicant['job_title']; ?></td>
 			</tr>
 			<tr>
 				<td><b>Date Applied:</b></td>
-				<td class="left-tab-pad"><?php echo $date_applied; ?></td>
+				<td class="left-tab-pad"><?php echo $applicant['date_applied']; ?></td>
 			</tr>
 			<tr>
 				<td><b>Phone Number:</b></td>
-				<td class="left-tab-pad"><?php echo $phone; ?></td>
+				<td class="left-tab-pad"><?php echo $applicant['applicant_phone']; ?></td>
 			</tr>
 			<tr>
 				<td><b>Email Address:</b></td>
-				<td class="left-tab-pad"><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></td>
+				<td class="left-tab-pad"><a href="mailto:<?php echo $applicant['applicant_email']; ?>"><?php echo $applicant['applicant_email']; ?></a></td>
 			</tr>
 			<tr>
 				<td><b>Ethnicity:</b></td>
@@ -112,7 +127,7 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 				--------------------------------
 			*/
 	
-			if($stage == '0' || $newstage == '0'){ ?>
+			if($applicant['stage'] == 0){ ?>
 			
 				<table>
 					<tr>
@@ -133,7 +148,7 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 					</tr>
 				</table>
 			
-	  <?php }else if($stage == '1' || $newstage == '1'){ ?>
+	  <?php }else if($applicant['stage'] == 1){ ?>
 	  			<table>
 					<tr>
 						<td>Phone Interview:</td>
@@ -152,7 +167,7 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 						<td><span class="glyphicon glyphicon-edit red applicant-icon" aria-hidden="true"></span></td>
 					</tr>
 				</table>
-	  <?php }else if($stage == '2' || $newstage == '2'){ ?>
+	  <?php }else if($applicant['stage'] == 2){ ?>
 	  			<table>
 					<tr>
 						<td>Phone Interview:</td>
@@ -171,7 +186,7 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 						<td><span class="glyphicon glyphicon-edit red applicant-icon" aria-hidden="true"></span></td>
 					</tr>
 				</table>
-	  <?php }else if($stage == '3' || $newstage == '3'){ ?>
+	  <?php }else if($applicant['stage'] == 3){ ?>
 				<table>
 					<tr>
 						<td>Phone Interview:</td>
@@ -190,7 +205,7 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 						<td><span class="glyphicon glyphicon-edit red applicant-icon" aria-hidden="true"></span></td>
 					</tr>
 				</table>
-	  <?php }else if($stage == '4' || $stage_num == '6'  || $newstage == '4'  || $newstage == '6'){ ?>
+	  <?php }else if($applicant['stage'] == 4 || $applicant['stage'] == 6){ ?>
 				<table>
 					<tr>
 						<td>Phone Interview:</td>
@@ -212,13 +227,33 @@ Applicants::update_applicant_profile($ftp_server, $ftp_username, $ftp_userpass, 
 	  <?php }else { ?>
 				<span>There was an error displaying the user status</span>
 	  <?php } ?>
-			
+			<form action="" method="post" id="next">
+				<input type="hidden" name="action" value="next-step">
+				<input type="hidden" name="action" value="<?php echo $applicant['applicant_id']; ?>">
+				<input type="submit" class="btn btn-primary" value="Move To Next Step">
+			</form>
 	</div>
 </div>
 
 <div class="applicant-block applicant-notes">
-	<h3>Notes</h3>
+	<h3>Grading Scale</h3>
+	
 </div>
 
+<div class="applicant-block applicant-notes">
+	<h3>Notes</h3>
+	<form action="" method="post" id="phone_interview_notes">
+		<input type="hidden" name="action" value="phone_interview_action">
 
-<?php include __DIR__ . "/../../../../view/footer.php"; ?>
+		<div class="form-group">
+			<label for="phone_interview">Phone Interview</label>
+			<textarea name="phone_interview"></textarea>
+		</div>
+		<input type="submit" value="Add Note" class="btn btn-success">
+	</form>
+</div>
+
+<script>
+	CKEDITOR.replace( 'phone_interview' );
+</script>
+<?php include __DIR__ . "/../../view/footer.php"; ?>

@@ -58,9 +58,9 @@ form.form-inline {
 	<tr>
 		<th>Action</th>
 		<th>Job Id</th>
+		<th>Applicant</th>
 		<th>Interview Stage</th>
 		<th>Position</th>
-		<th>Applicant</th>
 		<th>Phone Number</th>
 		<th>Resume</th>
 		<th></th>
@@ -69,6 +69,12 @@ form.form-inline {
 	<tr>
 		<td><input type="checkbox" name="applicant_action[]" value="<?php echo $applicant['applicant_id']; ?>"></td>
 		<td>000<?php echo $applicant['job_id']; ?></td>
+		<td>
+			<form action="<?php echo D_ROOT; ?>/profile/_util/user-profile.php" method="post" id="applicant_id_send">
+				<input type="hidden" name="applicant_id" value="<?php echo $applicant['applicant_id']; ?>">
+				<input type="submit" value="<?php echo $applicant['applicant_firstName'] . " " . $applicant['applicant_lastName']; ?>" class="btn">
+			</form>
+		</td>
 		<td>
 			<?php 
 				
@@ -93,8 +99,7 @@ form.form-inline {
 			
 			?>
 		</td>
-		<td><?php echo $applicant['job_title']; ?></td>
-		<td><a href="<?php echo "/profile/".$_SESSION['company_name']."/applicants/".$applicant['applicant_lastName']."_".$applicant['applicant_firstName']."/applicant_profile.php"; ?>"><?php echo $applicant['applicant_firstName'] . " " . $applicant['applicant_lastName']; ?></a></td>
+		<td><?php echo $applicant['job_title']; ?></td>		
 		<td><?php echo $applicant['applicant_phone']; ?></td>
 		<td><a href="<?php echo "/profile/".$_SESSION['company_name']."/applicants/".$applicant['applicant_lastName']."_".$applicant['applicant_firstName']."/".$applicant['applicant_lastName']."_".$applicant['applicant_firstName']; ?>_resume.pdf" target="_blank">View Resume</a></td>
 		<td><a href="#" class="btn btn-success">Next Step</a></td>
